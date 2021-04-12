@@ -19,6 +19,7 @@ $ip_address=$_SERVER['REMOTE_ADDR'];
 $geopluginURL='http://www.geoplugin.net/php.gp?ip='.$ip_address;
 $addrDetailsArr = unserialize(file_get_contents($geopluginURL)); 
 $city = $addrDetailsArr['geoplugin_city']; 
+$_SESSION['addr']=$addrDetailsArr;
 $country = $addrDetailsArr['geoplugin_countryName'];
 ob_start();
 system('ipconfig /all');
@@ -70,8 +71,9 @@ exit();
           <p>
             <a href="registration.php">Sign up Now!</a> for a webarch account,It's free and always will be..</p>
           <br>
-
-		   
+          <h2>
+            <a href="./get-quote.php">الإستفسار عن خدمات</a>
+		   </h2>
         </div>
         <div class="col-md-5 "> <br>
              <p style="color:#F00"><?php echo $_SESSION['action1'];?><?php echo $_SESSION['action1']="";?></p>

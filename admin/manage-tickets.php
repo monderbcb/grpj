@@ -9,7 +9,7 @@ if(isset($_POST['update']))
 {
 $adminremark=$_POST['aremark'];
 $fid=$_POST['frm_id'] ;
-mysqli_query($con,"update ticket set admin_remark='$adminremark' where id='$fid'");
+mysqli_query($con,"update ticket set admin_remark='$adminremark' , status = 'Closed' where id='$fid'");
 echo '<script>alert("Ticket has been updated.")</script>';
 }
 ?>

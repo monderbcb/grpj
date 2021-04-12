@@ -3,6 +3,32 @@ session_start();
 include("dbconnection.php");
 include("checklogin.php");
 check_login();
+if (isset($_POST['del'])){
+
+    $idDeleted = $_POST['delnum'];
+    $msg=mysqli_query($con,"select COUNT(id) FROM usercheck WHERE user_id = $idDeleted "); 
+    $te=mysqli_fetch_row($msg)[0];
+    if ($te == 0 ) {
+        $msg2=mysqli_query($con,"DELETE FROM user WHERE id= $idDeleted "); 
+        echo '
+        <script>
+        alert (
+            "USER DELETED SUCCFULLY"
+        )
+        </script>
+        ';
+    }
+    else {
+        echo '
+        <script>
+        alert (
+            "This cannot be deleted< becuse 7leep bil aLOUZE"
+        )
+        </script>
+        ';
+    }
+
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -53,9 +79,10 @@ check_login();
 
                     </li>
                 </ul>
-                <div class="page-title">	<i class="icon-custom-left"></i>
+                <div class="page-title">	<a href="./home.php">  <i class="icon-custom-left"></i></a>
 
-                    	<h3>Manage Users </h3>	
+                    	<h3 >Manage Users </h3>
+                        <a href="./registration.php" class="fa fa-2x fa-user" aria-hidden="true"> add new users</a>	
                 </div>
              
                 <div class="row">
@@ -85,7 +112,7 @@ check_login();
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                <?php $ret=mysqli_query($con,"select * from user");
+                                                <?php $ret=mysqli_query($con,"select * from user ORDER BY id asc");
 												$cnt=1;
 												while($row=mysqli_fetch_array($ret))
 												{
@@ -99,8 +126,10 @@ check_login();
                                                           <td><?php echo $row['posting_date'];?></td>
                                                           <td>
                                                           <form name="abc" action="" method="post">
-                                                           <a href="edit-user.php?id=<?php echo $row['id'];?>" class="btn btn-primary btn-xs btn-mini">View n Edit</a> 
-                                                           <button type="button" class="btn btn-danger btn-xs btn-mini">Delete </button>
+                                                           <a href="edit-user.php?id=<?php echo $row['id'];?>" class="btn btn-primary btn-xs btn-mini">View n Edit</a>
+                                                           <input type="hidden" name="delnum" value="<?php echo $row['id'];?>" > 
+                                                           <input type="submit" name="del" value="Delete" class="btn btn-danger btn-xs btn-mini" 
+                                                           onclick="return confirm('Are you sure you want to DELETE THIS USER ?')">
                                                            </form>
                                                           </td>
                                                     </tr>

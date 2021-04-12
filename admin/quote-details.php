@@ -5,7 +5,7 @@ include("checklogin.php");
 check_login();
 if(isset($_POST['remark']))
 {
-	$msg=mysqli_query($con,"update prequest set remark='".$_POST['adminremark']."' where id='".$_GET['id']."'");
+	$msg=mysqli_query($con,"update prequest set remark='".$_POST['adminremark']."' , status='1' where id='".$_GET['id']."'");
 	if($msg)
 	{
 	echo "<script>alert('Remark Updated');</script>";	

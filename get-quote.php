@@ -1,33 +1,35 @@
 <?php
 session_start();
 include("dbconnection.php");
-include("checklogin.php");
-check_login();
-error_reporting(0);
+// include("checklogin.php"); 
+// check_login();    
+// error_reporting(0);
+$services = mysqli_query($con,"select * from service where status= 1");
+
 if(isset($_POST['submit']))
 {
 	$name=$_POST['name'];
 	$email=$_POST['email'];
 	$contact=$_POST['contact'];
 	$company=$_POST['company'];
-	$wdd=$_POST['wdnd'];
-	$seo=$_POST['seo'];
-	$swd=$_POST['swd'];
-	$fwd=$_POST['fwd'];
-	$whs=$_POST['whs'];
-	$ed=$_POST['ed'];
-	$opi=$_POST['opi'];
-	$dba=$_POST['dba'];
-	$nd=$_POST['nd'];
-	$cms=$_POST['cms'];
-	$smo=$_POST['smo'];
-	$dwd=$_POST['dwd'];
-	$dr=$_POST['dr'];
-	$wm=$_POST['wm'];
-	$wta=$_POST['wta'];
-	$ld=$_POST['ld'];
-	$osc=$_POST['osc'];
-	$other=$_POST['other'];
+	// $wdd=$_POST['wdnd'];
+	// $seo=$_POST['seo'];
+	// $swd=$_POST['swd'];
+	// $fwd=$_POST['fwd'];
+	// $whs=$_POST['whs'];
+	// $ed=$_POST['ed'];
+	// $opi=$_POST['opi'];
+	// $dba=$_POST['dba'];
+	// $nd=$_POST['nd'];
+	// $cms=$_POST['cms'];
+	// $smo=$_POST['smo'];
+	// $dwd=$_POST['dwd'];
+	// $dr=$_POST['dr'];
+	// $wm=$_POST['wm'];
+	// $wta=$_POST['wta'];
+	// $ld=$_POST['ld'];
+	// $osc=$_POST['osc'];
+	// $other=$_POST['other'];
 	$query=$_POST['query'];
 	$pd=date('Y-m-d');
 mysqli_query($con,"insert into prequest(name,email,contactno,company,wdd,cms,seo,smo,swd,dwd,fwd,dr,whs,wm,ed,wta,opi,ld,da,osc,nd,others,query,posting_date) values('$name','$email','$contact','$company','$wdd','$cms','$seo','$smo','$swd','$dwd','$fwd','$dr','$whs','$wm','$ed','$wta','$opi','$ld','$dba','$osc','$nd','$other','$query','$pd')");
@@ -56,13 +58,9 @@ $_SESSION['msg']="Query Send";
 <link href="assets/css/custom-icon-set.css" rel="stylesheet" type="text/css"/>
 </head>
 <body class="">
-<?php include("header.php");?>
-<div class="page-container row-fluid">
-	<?php include("leftbar.php");?>
-	<div class="clearfix"></div>
-    <!-- END SIDEBAR MENU --> 
-  </div>
-  </div>
+
+
+ 
   <a href="#" class="scrollup">Scroll</a>
    <div class="footer-widget">		
 	<div class="progress transparent progress-small no-radius no-margin">
@@ -131,23 +129,23 @@ $_SESSION['msg']="Query Send";
                                              <label class="col-md-3 control-label">Service Required :</label>
                                                 <div class="col-md-9">                                                                                                                                        
                                              <label class="check">
-                                             <input type="checkbox" class="icheckbox" name="wdnd" value="Website Design & Development" checked="checked"/> Website Design & Development</label><br>
+                                             <input type="checkbox" class="icheckbox" name="service" value="Website Design & Development" checked="checked"/> Website Design & Development</label><br>
                                              <label class="check">
-                                             <input type="checkbox" class="icheckbox" name="seo" value="SEO (Search Engine Optimization)" />SEO (Search Engine Optimization)	</label><br>
+                                             <input type="checkbox" class="icheckbox" name="service" value="SEO (Search Engine Optimization)" />SEO (Search Engine Optimization)	</label><br>
                                              <label class="check">
-                                             <input type="checkbox" class="icheckbox" name="swd" value="Static Website Design" /> Static Website Design</label><br>
+                                             <input type="checkbox" class="icheckbox" name="service" value="Static Website Design" /> Static Website Design</label><br>
                                              <label class="check">
-                                             <input type="checkbox" class="icheckbox" name="fwd" value="Flash Website Development" /> Flash Website Development</label><br>
+                                             <input type="checkbox" class="icheckbox" name="service" value="Flash Website Development" /> Flash Website Development</label><br>
                                              <label class="check">
-                                             <input type="checkbox" class="icheckbox" name="whs" value="Web Hosting Services" /> Web Hosting Services</label><br>
+                                             <input type="checkbox" class="icheckbox" name="service" value="Web Hosting Services" /> Web Hosting Services</label><br>
                                              <label class="check">
-                                             <input type="checkbox" class="icheckbox" name="ed"  value="Ecommerce Development"/> Ecommerce Development</label><br>
+                                             <input type="checkbox" class="icheckbox" name="service"  value="Ecommerce Development"/> Ecommerce Development</label><br>
                                                  <label class="check">
-                                             <input type="checkbox" class="icheckbox" name="opi" value="Online Payment Integration" /> Online Payment Integration</label><br>
+                                             <input type="checkbox" class="icheckbox" name="service" value="Online Payment Integration" /> Online Payment Integration</label><br>
                                                  <label class="check">
-                                             <input type="checkbox" class="icheckbox" name="dba" value="Dash board Application" /> Dash board Application</label><br>
+                                             <input type="checkbox" class="icheckbox" name="service" value="Dash board Application" /> Dash board Application</label><br>
                                                  <label class="check">
-                                             <input type="checkbox" class="icheckbox" name="nd" value="NewsLetter Design" /> NewsLetter Design</label>
+                                             <input type="checkbox" class="icheckbox" name="service" value="NewsLetter Design" /> NewsLetter Design</label>
                                                 
                                                   
                                                 </div>
@@ -185,23 +183,23 @@ $_SESSION['msg']="Query Send";
                                                 <label class="col-md-3 control-label"></label>
                                                 <div class="col-md-9">                                                                                                                                        
                                                  <label class="check">
-                                             <input type="checkbox" class="icheckbox" name="cms" value="CMS (Content Management System)" />CMS (Content Management System)</label><br>
+                                             <input type="checkbox" class="icheckbox" name="service" value="CMS (Content Management System)" />CMS (Content Management System)</label><br>
                                              <label class="check">
-                                             <input type="checkbox" class="icheckbox" name="smo" value="SMO (Social Media Optimization)	" />SMO (Social Media Optimization)		</label><br>
+                                             <input type="checkbox" class="icheckbox" name="service" value="SMO (Social Media Optimization)	" />SMO (Social Media Optimization)		</label><br>
                                              <label class="check">
-                                             <input type="checkbox" class="icheckbox" name="dwd" value="Dynamic Website Design" /> Dynamic Website Design</label><br>
+                                             <input type="checkbox" class="icheckbox" name="service" value="Dynamic Website Design" /> Dynamic Website Design</label><br>
                                              <label class="check">
-                                             <input type="checkbox" class="icheckbox" name="dr" value="Domain Registration" /> Domain Registration </label><br>
+                                             <input type="checkbox" class="icheckbox" name="service" value="Domain Registration" /> Domain Registration </label><br>
                                              <label class="check">
-                                             <input type="checkbox" class="icheckbox" name="wm" value="Website Maintenance" /> Website Maintenance</label><br>
+                                             <input type="checkbox" class="icheckbox" name="service" value="Website Maintenance" /> Website Maintenance</label><br>
                                              <label class="check">
-                                             <input type="checkbox" class="icheckbox" name="wta" value="Walk Through Animation" /> Walk Through Animation</label><br>
+                                             <input type="checkbox" class="icheckbox" name="service" value="Walk Through Animation" /> Walk Through Animation</label><br>
                                                  <label class="check">
-                                             <input type="checkbox" class="icheckbox" name="ld" value="Logo Design" /> Logo Design</label><br>
+                                             <input type="checkbox" class="icheckbox" name="service" value="Logo Design" /> Logo Design</label><br>
                                                  <label class="check">
-                                             <input type="checkbox" class="icheckbox" name="osc" value="Open Source Customization" /> Open Source Customization</label><br>
+                                             <input type="checkbox" class="icheckbox" name="service" value="Open Source Customization" /> Open Source Customization</label><br>
                                                  <label class="check">
-                                             <input type="checkbox" class="icheckbox" name="other" value="Others" /> Others </label>
+                                             <input type="checkbox" class="icheckbox" name="service" value="Others" /> Others </label>
                                                    
                                                 </div>
                                             </div>

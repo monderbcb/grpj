@@ -153,7 +153,7 @@ check_login();
                       $qr2=mysqli_query($con,"select * from prequest where status='1'");
 					  $oq2=mysqli_num_rows($qr2);
 					  ?>
-						<span class="item-title">In Progress</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $oq2;?>" data-animation-duration="700">0</span> 
+						<span class="item-title">Replied</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $oq2;?>" data-animation-duration="700">0</span> 
 					 </div>
                     </div>
                   
