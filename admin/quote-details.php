@@ -5,7 +5,7 @@ include("checklogin.php");
 check_login();
 if(isset($_POST['remark']))
 {
-	$msg=mysqli_query($con,"update prequest set remark='".$_POST['adminremark']."' , status='1' where id='".$_GET['id']."'");
+	$msg=mysqli_query($con,"update prequest set remark='".$_POST['adminremark']."' , status='2' where id='".$_GET['id']."'");
 	if($msg)
 	{
 	echo "<script>alert('Remark Updated');</script>";	
@@ -65,6 +65,7 @@ if(isset($_POST['remark']))
 	</div>
  	<?php
     $ret=mysqli_query($con,"select * from prequest where id='".$_GET['id']."'");
+	$requestID=$_GET['id'];
 	while($row=mysqli_fetch_array($ret))
 	{
 	
@@ -95,24 +96,24 @@ if(isset($_POST['remark']))
 										</address>	
                                         <address class="margin-bottom-20 margin-top-10">
 											<strong>Required Services</strong><br>
-											<?php echo $row['wdd'];?><br>
-                    <?php echo $row['cms'];?>
-                    <?php echo $row['seo'];?>
-                    <?php echo $row['smo'];?>
-                    <?php echo $row['swd'];?>
-                    <?php echo $row['dwd'];?>
-                    <?php echo $row['fwd'];?>
-                    <?php echo $row['dr'];?>
-					<?php echo $row['whs'];?>
-                    <?php echo $row['wm'];?>
-					<?php echo $row['ed'];?>
-					<?php echo $row['wta'];?>
-					<?php echo $row['opi'];?>
-					<?php echo $row['ld'];?>
-					<?php echo $row['da'];?>
-                    	<?php echo $row['osc'];?>
-                        	<?php echo $row['nd'];?>
-                            	<?php echo $row['others'];?>
+											<?php 
+											
+											if ($row['others']==1) {
+												echo "OTHER : ".$row['query'];
+											  }
+											  $servicess= mysqli_query(
+												 $con," SELECT service.name FROM service_prequest
+												  LEFT OUTER JOIN service ON service_prequest.service_id = 
+												  service.id WHERE service_prequest.request_id = ". $requestID );
+						  
+											  while($row2=mysqli_fetch_array($servicess))
+														   {
+														   echo $row2['name'] . "<br>";
+														 }
+														 ?>
+											
+											
+                  
 											
 										</address>										 
 										<address>
@@ -121,8 +122,11 @@ if(isset($_POST['remark']))
 										</address>
                                         <form name="remark" action="" method="post" enctype="multipart/form-data">
                                         <address>
-											<strong>Remark</strong><br>
-										<textarea name="adminremark" cols="70" rows="4"><?php echo $row['remark'];?></textarea><br /><br />
+										<strong>Past Remark</strong><br>
+											<?php echo $row['remark'];?><br>
+											<strong>New Remark ?</strong><br>
+											
+										<textarea name="adminremark" cols="70" rows="4"></textarea><br /><br />
                                         <input type="submit" name="remark" value="Submit" />
 										</address>
                                         </form>

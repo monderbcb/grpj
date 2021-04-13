@@ -71,38 +71,52 @@ check_login();
                     <th style="width:10%" data-hide="phone,tablet">Email</th>
                     <th style="width:10%">Contact no</th>
                     <th style="width:20%" data-hide="phone,tablet">Services Required</th>
+                    <th style="width:20%" data-hide="phone,tablet">Stutes</th>
                     <th style="width:10%">Action </th>
                   </tr>
                 </thead>
                 <tbody>
-                <?php $ret=mysqli_query($con,"select * from prequest order by id desc");
+                <?php $newQuest=mysqli_query($con,"select * from prequest order by posting_date DESC");
+
 				$cnt=1;
-				while($row=mysqli_fetch_array($ret))
+				while($row=mysqli_fetch_array($newQuest))
 				{?>
                   <tr >
                     <td class="v-align-middle"><?php echo $cnt;?></td>
                     <td class="v-align-middle"><?php echo $row['name'];?></td>
                     <td class="v-align-middle"><span class="muted"><?php echo $row['email'];?></span></td>
                     <td><span class="muted"><?php echo $row['contactno'];?></span></td>
-                    <td class="v-align-middle"><?php echo $row['wdd'];?>
-                    <?php echo $row['cms'];?>
-                    <?php echo $row['seo'];?>
-                    <?php echo $row['smo'];?>
-                    <?php echo $row['swd'];?>
-                    <?php echo $row['dwd'];?>
-                    <?php echo $row['fwd'];?>
-                    <?php echo $row['dr'];?>
-					<?php echo $row['whs'];?>
-                    <?php echo $row['wm'];?>
-					<?php echo $row['ed'];?>
-					<?php echo $row['wta'];?>
-					<?php echo $row['opi'];?>
-					<?php echo $row['ld'];?>
-					<?php echo $row['da'];?>
-                    	<?php echo $row['osc'];?>
-                        	<?php echo $row['nd'];?>
-                            	<?php echo $row['others'];?>
+                    <td class="v-align-middle"><?php
+                    if ($row['others']==1) {
+                      echo "OTHER : ".$row['query'];
+                    }
+                    $servicess= mysqli_query(
+                       $con," SELECT service.name FROM service_prequest
+                        LEFT OUTER JOIN service ON service_prequest.service_id = 
+                        service.id WHERE service_prequest.request_id = ". $row['id'] );
+
+                    while($row2=mysqli_fetch_array($servicess))
+                            	 {
+                                 echo $row2['name'] . "--";
+                               }
+                               ?>
                     </td>
+                    <td><?php 
+                    switch ($row['status']) {
+                      case '1':
+                        echo 'NEW';
+                        break;
+                      case '2':
+                        echo 'Answerd';
+                        break;
+                      case '3':
+                        echo 'Un-Answerd';
+                        break;
+                      default:
+                        # code...
+                        break;
+                    }
+                    ?></td>
                       <td><a href="quote-details.php?id=<?php echo $row['id'];?>"><button class="btn-danger-dark">View</button></a></td>
                   </tr>
                  <?php $cnt=$cnt+1; } ?>

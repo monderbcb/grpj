@@ -141,7 +141,7 @@ check_login();
                     <div class="widget-stats">
                       <div class="wrapper transparent">
                        <?php
-                      $qr1=mysqli_query($con,"select * from prequest where status='0'");
+                      $qr1=mysqli_query($con,"select * from prequest where status='1'");
 					  $oq1=mysqli_num_rows($qr1);
 					  ?>
 						<span class="item-title">New Quotes's</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $oq1;?>" data-animation-duration="700">0</span> 
@@ -150,10 +150,19 @@ check_login();
                     <div class="widget-stats ">
                       <div class="wrapper last"> 
                        <?php
-                      $qr2=mysqli_query($con,"select * from prequest where status='1'");
+                      $qr2=mysqli_query($con,"select * from prequest where status='2'");
 					  $oq2=mysqli_num_rows($qr2);
 					  ?>
 						<span class="item-title">Replied</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $oq2;?>" data-animation-duration="700">0</span> 
+					 </div>
+                    </div>
+					<div class="widget-stats ">
+                      <div class="wrapper last"> 
+                       <?php
+                      $qr3=mysqli_query($con,"select * from prequest where status='3'");
+					  $oq3=mysqli_num_rows($qr3);
+					  ?>
+						<span class="item-title">Un-Answerd</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $oq3;?>" data-animation-duration="700">0</span> 
 					 </div>
                     </div>
                   
