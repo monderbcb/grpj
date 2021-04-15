@@ -21,11 +21,11 @@ if(isset($_POST['submit']))
    
 	$query=$_POST['query'];
 	$pd=date('Y-m-d');
-    mysqli_query($con,"insert into prequest(name,email,contactno,company
+    mysqli_query($con,"INSERT into prequest(name,email,contactno,company
     ,others,query,posting_date) values('$name','$email','$contact','$company','$other','$query','$pd')");
     $preprequestid=mysqli_insert_id($con);
 foreach ($service_selected as $key) {
-    mysqli_query($con,"insert into service_prequest(request_id,service_id) values('$preprequestid','$key')");
+    mysqli_query($con,"INSERT into service_prequest(request_id,service_id) values('$preprequestid','$key')");
 }
 $_SESSION['msg']="Query Send";
 }

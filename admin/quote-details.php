@@ -3,12 +3,15 @@ session_start();
 include("dbconnection.php");
 include("checklogin.php");
 check_login();
+
 if(isset($_POST['remark']))
 {
 	$msg=mysqli_query($con,"update prequest set remark='".$_POST['adminremark']."' , status='2' where id='".$_GET['id']."'");
 	if($msg)
 	{
 	echo "<script>alert('Remark Updated');</script>";	
+	header("Location: ./email-template.php?type=1&id=".$_GET['id']);
+	exit();
 	}
 }
 ?><!DOCTYPE html>
