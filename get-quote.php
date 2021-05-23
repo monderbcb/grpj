@@ -86,7 +86,8 @@ $_SESSION['msg']="Query Send";
                             <form class="form-horizontal" method="post" enctype="multipart/form-data">
                             <div class="panel panel-default">
                              
-                                 <p style="color:#F00;"><?php echo $_SESSION['msg'];?><?php echo $_SESSION['msg']="";?></p>
+                                 <p style="color:#F00;"><?php  if(isset($_SESSION['msg']))
+                                                                echo $_SESSION['msg'];?><?php echo $_SESSION['msg']="";?></p>
                                 <div class="panel-body">
                                     <p>Please click below mention services of your interest to receive quotation for the same:</p>
                                 </div>
