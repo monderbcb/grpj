@@ -101,6 +101,8 @@ include('header.php');
 					?>						
 					</div>
 					<?php
+					if($currentSession == null)
+					$currentSession = 0;
 										echo "Current session = " .  $currentSession;
 
 					?>

@@ -109,7 +109,7 @@ function sendMessage(to_user_id) {
 			
 			var resp = response;			
 			$('#conversation').html(resp.conversation);				
-			$(".messages").animate({ scrollTo: $('.messages').height() }, "fast");
+			$(".messages").animate({ scrollTo: $('.messages ul').height() }, "fast");
 		}
 	});
 	updateUserChat();	
@@ -130,13 +130,17 @@ function showUserChat(to_user_id){
 function updateUserChat() {
 	$('li.contact.active').each(function(){
 		var to_user_id = $(this).attr('data-touserid');
+		if(to_user_id == '' || to_user_id == 0 || to_user_id == " " || to_user_id == null){
+			to_user_id = 0;
+		}
+		console.log("To uaser " +to_user_id)
 		$.ajax({
-			url:"chat_action.php",
+			url:"http://localhost/crm/crm/chat/chat_action.php",
 			method:"POST",
 			data:{to_user_id:to_user_id, action:'update_user_chat'},
 			dataType: "json",
 			success:function(response){	
-						
+						console.log(response)
 				$('#conversation').html(response.conversation);			
 			}
 		});

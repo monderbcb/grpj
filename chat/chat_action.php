@@ -16,6 +16,7 @@ if($_POST['action'] == 'show_chat') {
 	$chat->showUserChat($_SESSION['id'], $_POST['to_user_id']);
 }
 if($_POST['action'] == 'update_user_chat') {
+	
 	$conversation = $chat->getUserChat($_SESSION['id'], $_POST['to_user_id']);
 	$data = array(
 		"conversation" => $conversation			
