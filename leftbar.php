@@ -27,7 +27,9 @@
                               <li ><a href="get-quote.php"> <span class="fa fa-tasks"></span> Request a Quote</a></li>
 							     <li class="active"><a href="create-ticket.php"><span class="fa fa-ticket"></span> Create Ticket</a></li>
                                 <li ><a href="view-tickets.php"><span class="fa fa-ticket"></span> View Ticket</a></li>
-                           
+                                <li ><a href="./chat/"><span class="fa fa-ticket"></span> Live Chat</a></li>
+                                <li > </li>
+
     </ul>
     
 	

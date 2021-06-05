@@ -4,13 +4,24 @@ error_reporting(0);
 include("dbconnection.php");
 if(isset($_POST['login']))
 {
-$ret=mysqli_query($con,"SELECT * FROM user WHERE email='".$_POST['email']."' and password='".$_POST['password']."'");
+$ret=mysqli_query($con,"SELECT * FROM user WHERE name='".$_POST['email']."' and password='".$_POST['password']."'");
 $num=mysqli_fetch_array($ret);
 if($num>0)
 {
-$_SESSION['login']=$_POST['email'];
+$_SESSION['login']=$num['email'];
 $_SESSION['id']=$num['id'];
 $_SESSION['name']=$num['name'];
+$sqlInsert = "
+    INSERT INTO chat_login_details (userid) 
+    VALUES (".$num['id'].")";
+  mysqli_query($con, $sqlInsert);
+  $lastInsertId = mysqli_insert_id($con);
+  $_SESSION['login_details_id'] = $lastInsertId;
+$sqlUserUpdate = "
+			UPDATE user 
+			SET online = 1 
+			WHERE id = '".$num['id']."'";			
+		mysqli_query($con, $sqlUserUpdate);	
 $val3 =date("Y/m/d");
 date_default_timezone_set("Asia/Calcutta");
 $time=date("h:i:sa");
@@ -69,7 +80,7 @@ exit();
         <div class="col-md-5 col-md-offset-1">
           <h2>Sign in to CRM</h2>
           <p>
-            <a href="registration.php">Sign up Now!</a> for a webarch account,It's free and always will be..</p>
+             for a webarch account,It's free and always will be..</p>
           <br>
           <h2>
             <a href="./get-quote.php">الإستفسار عن خدمات</a>

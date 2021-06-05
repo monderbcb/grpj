@@ -2,7 +2,7 @@
 class Chat{
     private $host  = 'localhost';
     private $user  = 'root';
-    private $password   = "";
+    private $password   = "mysql";
     private $database  = "crm";      
     private $chatTable = 'chat';
 	private $chatUsersTable = 'user';
@@ -54,7 +54,7 @@ class Chat{
 		$sqlQuery = "
 			SELECT * FROM ".$this->chatUsersTable." 
 			WHERE id = '$id'";
-		return  $this->getData($sqlQuery);
+		return  mysqli_fetch_array(mysqli_query($this->dbConnect, $sqlQuery));
 	}
 	public function getUserAvatar($id){
 		$sqlQuery = "
@@ -97,8 +97,9 @@ class Chat{
 		$toUserAvatar = $this->getUserAvatar($to_user_id);			
 		$sqlQuery = "
 			SELECT * FROM ".$this->chatTable." 
-			WHERE (sender_userid = '".$from_user_id."') 
-			OR (reciever_userid = '".$from_user_id."') 
+			WHERE (sender_userid = '".$to_user_id."' 
+			AND reciever_userid = '".$from_user_id."') OR (sender_userid = '".$from_user_id."' 
+			AND reciever_userid = '".$to_user_id."') 
 			ORDER BY timestamp ASC";
 		$userChat = $this->getData($sqlQuery);	
 		$conversation = '<ul>';
@@ -120,16 +121,16 @@ class Chat{
 	public function showUserChat($from_user_id, $to_user_id) {		
 		$userDetails = $this->getUserDetails($to_user_id);
 		$toUserAvatar = '';
-		foreach ($userDetails as $user) {
-			$toUserAvatar = $user['avatar'];
-			$userSection = '<img src="userpics/'.$user['avatar'].'" alt="" />
-				<p>'.$user['name'].'</p>
+		
+			$toUserAvatar = $userDetails['avatar'];
+			$userSection = '<img src="userpics/'.$userDetails['avatar'].'" alt="" />
+				<p>'.$userDetails['name'].'</p>
 				<div class="social-media">
 					<i class="fa fa-facebook" aria-hidden="true"></i>
 					<i class="fa fa-twitter" aria-hidden="true"></i>
 					 <i class="fa fa-instagram" aria-hidden="true"></i>
 				</div>';
-		}		
+			
 		// get user conversation
 		$conversation = $this->getUserChat($from_user_id, $to_user_id);	
 		// update chat user read status		
@@ -183,7 +184,7 @@ class Chat{
 	}		
 	public function insertUserLoginDetails($id) {		
 		$sqlInsert = "
-			INSERT INTO ".$this->chatLoginDetailsTable."(id) 
+			INSERT INTO ".$this->chatLoginDetailsTable."(userid) 
 			VALUES ('".$id."')";
 		mysqli_query($this->dbConnect, $sqlInsert);
 		$lastInsertId = mysqli_insert_id($this->dbConnect);

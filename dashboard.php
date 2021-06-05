@@ -129,7 +129,7 @@ include("dbconnection.php");
           
             <div class="side-widget fadeIn">
                <div class="side-widget-title">Chat Panel</div>
-             <div><?php include("chat.php");?></div>
+             <div></div>
             </div>
         </div>
 
@@ -137,6 +137,10 @@ include("dbconnection.php");
     </div>
 </div>
  </div>
+
+
+
+ 
 <script src="assets/plugins/jquery-1.8.3.min.js" type="text/javascript"></script> 
 <script src="assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script> 
 <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script> 
@@ -149,6 +153,6 @@ include("dbconnection.php");
 <script src="assets/js/core.js" type="text/javascript"></script> 
 <script src="assets/js/chat.js" type="text/javascript"></script> 
 <script src="assets/js/demo.js" type="text/javascript"></script> 
-
+<?php include("./chatok.html")  ?>
 </body>
 </html>

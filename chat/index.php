@@ -2,7 +2,6 @@
 session_start();
 include('header.php');
 ?>
-<title>phpzag.com : Demo Build Live Chat System with Ajax, PHP & MySQL</title>
 <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
 <link href="css/style.css" rel="stylesheet" id="bootstrap-css">
 <script src="js/chat.js"></script>
@@ -12,11 +11,9 @@ include('header.php');
     margin: 30px auto;	
 }
 </style>
-<?php include('container.php');?>
+
 <div class="container">		
-	<h1>Example: Build Live Chat System with Ajax, PHP & MySQL</h1>		
-	<br>		
-	<?php if(isset($_SESSION['id']) && $_SESSION['id']) { ?> 	
+	<?php if(isset($_SESSION['id']) && $_SESSION['id'] != -1 ) { ?> 	
 		<div class="chat">	
 			<div id="frame">		
 				<div id="sidepanel">
@@ -27,10 +24,12 @@ include('header.php');
 					$loggedUser = $chat->getUserDetails($_SESSION['id']);
 					echo '<div class="wrap">';
 					$currentSession = '';
-					foreach ($loggedUser as $user) {
-						$currentSession = $user['current_session'];
-						echo '<img id="profile-img" src="userpics/'.$user['avatar'].'" class="online" alt="" />';
-						echo  '<p>'.$user['username'].'</p>';
+				
+
+					 {
+						$currentSession = $loggedUser['current_session'];
+						echo '<img id="profile-img" src="userpics/'.$loggedUser['avatar'].'" class="online" alt="" />';
+						echo  '<p>'.$loggedUser['name'].'</p>';
 							echo '<i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>';
 							echo '<div id="status-options">';
 							echo '<ul>';
@@ -53,58 +52,65 @@ include('header.php');
 					</div>
 					<div id="contacts">	
 					<?php
-					// echo '<ul>';
-					// $chatUsers = $chat->chatUsers($_SESSION['id']);
-					// foreach ($chatUsers as $user) {
+					if($_SESSION['id'] == 0){
+						echo '<ul>';
+					$chatUsers = $chat->chatUsers($_SESSION['id']);
+					foreach ($chatUsers as $user) {
 			
-					// 	$status = 'offline';						
-					// 	if($user['online']) {
-					// 		$status = 'online';
-					// 	}
-					// 	$activeUser = '';
-					// 	if($user['id'] == $currentSession) {
-					// 		$activeUser = "active";
-					// 	}
-					// 	echo '<li id="'.$user['id'].'" class="contact '.$activeUser.'" data-touserid="'.$user['id'].'" data-tousername="'.$user['username'].'">';
-					// 	echo '<div class="wrap">';
-					// 	echo '<span id="status_'.$user['id'].'" class="contact-status '.$status.'"></span>';
-					// 	echo '<img src="userpics/'.$user['avatar'].'" alt="" />';
-					// 	echo '<div class="meta">';
-					// 	echo '<p class="name">'.$user['username'].'<span id="unread_'.$user['id'].'" class="unread">'.$chat->getUnreadMessageCount($user['id'], $_SESSION['id']).'</span></p>';
-					// 	echo '<p class="preview"><span id="isTyping_'.$user['id'].'" class="isTyping"></span></p>';
-					// 	echo '</div>';
-					// 	echo '</div>';
-					// 	echo '</li>'; 
-					// }
-					// echo '</ul>';
+						$status = 'offline';						
+						if($user['online']) {
+							$status = 'online';
+						}
+						$activeUser = '';
+						if($user['id'] == $currentSession) {
+							$activeUser = "active";
+						}
+						echo '<li id="'.$user['id'].'" class="contact '.$activeUser.'" data-touserid='.$user['id'].' data-tousername="'.$user['name'].'">';
+						echo '<div class="wrap">';
+						echo '<span id="status_'.$user['id'].'" class="contact-status '.$status.'"></span>';
+						echo '<img src="userpics/'.$user['avatar'].'" alt="" />';
+						echo '<div class="meta">';
+						echo '<p class="name">'.$user['name'].'<span id="unread_'.$user['id'].'" class="unread">'.$chat->getUnreadMessageCount($user['id'], $_SESSION['id']).'</span></p>';
+						echo '<p class="preview"><span id="isTyping_'.$user['id'].'" class="isTyping"></span></p>';
+						echo '</div>';
+						echo '</div>';
+						echo '</li>'; 
+					}
+					echo '</ul>';
+					}
 					?>
 					</div>
 				</div>			
 				<div class="content" id="content"> 
 					<div class="contact-profile" id="userSection">	
 					<?php
-					$userDetails = $chat->getUserDetails($currentSession);
-					foreach ($userDetails as $user) {										
-						echo '<img src="userpics/'.$user['avatar'].'" alt="" />';
-							echo '<p>'.$user['id'].'</p>';
+					if ($currentSession != null || $currentSession !="") {
+						# code...
+					
+						$userDetails = $chat->getUserDetails($currentSession);
+														
+						echo '<img src="userpics/'.$userDetails['avatar'].'" alt="" />';
+							echo '<p>'.$userDetails['id'].'</p>';
 							echo '<div class="social-media">';
 								echo '<i class="fa fa-facebook" aria-hidden="true"></i>';
 								echo '<i class="fa fa-twitter" aria-hidden="true"></i>';
 								 echo '<i class="fa fa-instagram" aria-hidden="true"></i>';
 							echo '</div>';
-					}	
-
+						
+					}
 					?>						
 					</div>
 					<?php
 										echo "Current session = " .  $currentSession;
 
 					?>
-					<div class="messages" id="conversation">		
+					<div class="messages" id="conversation" STYLE="padding-bottom:20px!important;">		
 					<?php
 					echo $chat->getUserChat($_SESSION['id'], $currentSession);						
 					?>
+					<br />
 					</div>
+					<br />
 					<div class="message-input" id="replySection">				
 						<div class="message-input" id="replyContainer">
 							<div class="wrap">
@@ -116,15 +122,17 @@ include('header.php');
 				</div>
 			</div>
 		</div>
-	<?php } else { ?>
-		<br>
-		<br>
-		<strong><a href="login.php"><h3>Login To Access Chat System</h3></a></strong>		
-	<?php } ?>
+	<?php } else { 
+		header("Location:index.php");	
+	 } ?>
 	<br>
 	<br>	
-	<div style="margin:50px 0px 0px 0px;">
-		<a class="btn btn-default read-more" style="background:#3399ff;color:white" href="http://www.phpzag.com/build-live-chat-system-with-ajax-php-mysql/">Back to Tutorial</a>		
-	</div>	
+	
 </div>	
-<?php include('footer.php');?>
+<script>
+	$(document).keypress(function(e){
+    if (e.which == 13){
+        $("#chatButton<?php echo $currentSession; ?>").click();
+    }
+});
+</script>

@@ -41,7 +41,9 @@ $(document).ready(function(){
 		$('.contact').removeClass('active');
 		$(this).addClass('active');
 		var to_user_id = $(this).data('touserid');
+		console.log(to_user_id);
 		showUserChat(to_user_id);
+		console.log(to_user_id);
 		$(".chatMessage").attr('id', 'chatMessage'+to_user_id);
 		$(".chatButton").attr('id', 'chatButton'+to_user_id);
 	});	
@@ -133,7 +135,8 @@ function updateUserChat() {
 			method:"POST",
 			data:{to_user_id:to_user_id, action:'update_user_chat'},
 			dataType: "json",
-			success:function(response){				
+			success:function(response){	
+						
 				$('#conversation').html(response.conversation);			
 			}
 		});

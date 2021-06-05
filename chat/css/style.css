@@ -547,14 +547,14 @@
 }
 #frame .content .messages {
   height: auto;
-  min-height: calc(100% - 93px);
-  max-height: calc(100% - 93px);
+  min-height: calc(120% - 300px);
+  max-height: calc(120% - 300px);
   overflow-y: scroll;
   overflow-x: hidden;
 }
 @media screen and (max-width: 735px) {
   #frame .content .messages {
-    max-height: calc(100% - 105px);
+    max-height: calc(100% - 125px);
   }
 }
 #frame .content .messages::-webkit-scrollbar {
@@ -573,7 +573,7 @@
   font-size: 0.9em;
 }
 #frame .content .messages ul li:nth-last-child(1) {
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 #frame .content .messages ul li.sent img {
   margin: 6px 8px 0 0;
@@ -604,7 +604,7 @@
 }
 @media screen and (min-width: 735px) {
   #frame .content .messages ul li p {
-    max-width: 300px;
+    max-width: 400px;
   }
 }
 #frame .content .message-input {

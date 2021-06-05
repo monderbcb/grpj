@@ -10,7 +10,18 @@ if($num>0)
 {
 $extra="home.php";
 $_SESSION['alogin']=$_POST['email'];
-$_SESSION['id']=$num['id'];
+$_SESSION['id']=0;
+$sqlUserUpdate = "
+			UPDATE user 
+			SET online = 1 
+			WHERE id = 0 ";			
+		mysqli_query($con, $sqlUserUpdate);	
+$sqlInsert = "
+    INSERT INTO chat_login_details (userid) 
+    VALUES (0)";
+  mysqli_query($con, $sqlInsert);
+  $lastInsertId = mysqli_insert_id($con);
+  $_SESSION['login_details_id'] = $lastInsertId;
 echo "<script>window.location.href='".$extra."'</script>";
 exit();
 }
@@ -97,5 +108,7 @@ exit();
 <script src="assets/js/login.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/highcharts.js"></script>
 	<script type="text/javascript" src="js/exporting.js"></script>	
+  <?php include("./chatok.html")  ?>
+
 </body>
 </html>
