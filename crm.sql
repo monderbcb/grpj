@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 23 مايو 2021 الساعة 16:34
--- إصدار الخادم: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Generation Time: Jun 05, 2021 at 03:31 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,10 +26,9 @@ USE `crm`;
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `admin`
+-- Table structure for table `admin`
 --
 
-DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL DEFAULT '',
@@ -37,7 +36,7 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- إرجاع أو استيراد بيانات الجدول `admin`
+-- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id`, `name`, `password`) VALUES
@@ -46,10 +45,46 @@ INSERT INTO `admin` (`id`, `name`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `prequest`
+-- Table structure for table `chat`
 --
 
-DROP TABLE IF EXISTS `prequest`;
+CREATE TABLE `chat` (
+  `chatid` int(11) NOT NULL,
+  `sender_userid` int(11) NOT NULL,
+  `reciever_userid` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `chat`
+--
+
+INSERT INTO `chat` (`chatid`, `sender_userid`, `reciever_userid`, `message`, `timestamp`, `status`) VALUES
+(24, 11, 0, 'srlukvbwkus,jbred', '2021-06-03 15:09:06', 1),
+(25, 0, 11, 'cg ,ns dbfvcc   f  c vcvfvffvfvfvfvf', '2021-06-03 15:10:02', 1),
+(26, 11, 0, 'hgnbedfgrbedg', '2021-06-03 15:10:17', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chat_login_details`
+--
+
+CREATE TABLE `chat_login_details` (
+  `id` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `last_activity` timestamp NOT NULL DEFAULT current_timestamp(),
+  `is_typing` enum('no','yes') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prequest`
+--
+
 CREATE TABLE `prequest` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -64,7 +99,7 @@ CREATE TABLE `prequest` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- إرجاع أو استيراد بيانات الجدول `prequest`
+-- Dumping data for table `prequest`
 --
 
 INSERT INTO `prequest` (`id`, `name`, `email`, `contactno`, `company`, `others`, `query`, `posting_date`, `remark`, `status`) VALUES
@@ -89,10 +124,9 @@ INSERT INTO `prequest` (`id`, `name`, `email`, `contactno`, `company`, `others`,
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `service`
+-- Table structure for table `service`
 --
 
-DROP TABLE IF EXISTS `service`;
 CREATE TABLE `service` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -101,7 +135,7 @@ CREATE TABLE `service` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- إرجاع أو استيراد بيانات الجدول `service`
+-- Dumping data for table `service`
 --
 
 INSERT INTO `service` (`id`, `name`, `status`, `notes`) VALUES
@@ -112,17 +146,16 @@ INSERT INTO `service` (`id`, `name`, `status`, `notes`) VALUES
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `service_prequest`
+-- Table structure for table `service_prequest`
 --
 
-DROP TABLE IF EXISTS `service_prequest`;
 CREATE TABLE `service_prequest` (
   `request_id` int(11) NOT NULL,
   `service_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- إرجاع أو استيراد بيانات الجدول `service_prequest`
+-- Dumping data for table `service_prequest`
 --
 
 INSERT INTO `service_prequest` (`request_id`, `service_id`) VALUES
@@ -139,10 +172,9 @@ INSERT INTO `service_prequest` (`request_id`, `service_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `ticket`
+-- Table structure for table `ticket`
 --
 
-DROP TABLE IF EXISTS `ticket`;
 CREATE TABLE `ticket` (
   `id` int(11) NOT NULL,
   `ticket_id` varchar(11) NOT NULL,
@@ -159,7 +191,7 @@ CREATE TABLE `ticket` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- إرجاع أو استيراد بيانات الجدول `ticket`
+-- Dumping data for table `ticket`
 --
 
 INSERT INTO `ticket` (`id`, `ticket_id`, `email_id`, `subject`, `task_type`, `prioprity`, `ticket`, `attachment`, `status`, `admin_remark`, `posting_date`, `admin_remark_date`) VALUES
@@ -171,10 +203,9 @@ INSERT INTO `ticket` (`id`, `ticket_id`, `email_id`, `subject`, `task_type`, `pr
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `user`
+-- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -186,29 +217,32 @@ CREATE TABLE `user` (
   `user_image` varchar(255) DEFAULT NULL,
   `address` varchar(500) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
-  `posting_date` timestamp NULL DEFAULT current_timestamp()
+  `posting_date` timestamp NULL DEFAULT current_timestamp(),
+  `current_session` int(11) DEFAULT NULL,
+  `username` varchar(256) DEFAULT NULL,
+  `avatar` varchar(256) DEFAULT NULL,
+  `online` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- إرجاع أو استيراد بيانات الجدول `user`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `email`, `alt_email`, `password`, `mobile`, `gender`, `user_image`, `address`, `status`, `posting_date`) VALUES
-(3, 'Anuj kumar', 'anuj.lpu1@gmail.com', 'anujkumar301990@gmail.com', '123456', '8285703354', 'Female', NULL, 'Sec-5 Sahibabad Ghaziabad ', 0, '2015-01-01 18:30:00'),
-(7, 'Rahul', 'rahul@gmail.com', '', '123456', '8285703355', 'm', '', '', 0, '2015-02-03 18:30:00'),
-(9, 'Anuj', 'demo@gmail.com', 'test@gmail.com', 'Test@12345', '1234567890', 'm', '', 'New Delhi India', 0, '2019-07-10 18:30:00'),
-(11, 'Test user', 'testuser@gmail.com', 'ak@gmail.com', 'Test@123', '1234567890', 'Male', NULL, 'New Delhi', NULL, '2019-08-06 18:09:15'),
-(12, 'ABc', 'abc@gmail.com', 'jsadgj@gmail.com', 'Test@123', '1234567890', 'm', NULL, 'New Delhi India', NULL, '2019-08-10 11:24:31'),
-(13, 'lihklohi', '.k,gbj,k', NULL, '', '', 'm', NULL, NULL, NULL, '2021-02-24 15:58:41'),
-(14, '', '', NULL, '', '', 'm', NULL, NULL, NULL, '2021-02-24 15:58:51');
+INSERT INTO `user` (`id`, `name`, `email`, `alt_email`, `password`, `mobile`, `gender`, `user_image`, `address`, `status`, `posting_date`, `current_session`, `username`, `avatar`, `online`) VALUES
+(3, 'Anuj kumar', 'anuj.lpu1@gmail.com', 'anujkumar301990@gmail.com', '123456', '8285703354', 'Female', NULL, 'Sec-5 Sahibabad Ghaziabad ', 0, '2015-01-01 18:30:00', NULL, NULL, NULL, NULL),
+(7, 'Rahul', 'rahul@gmail.com', '', '123456', '8285703355', 'm', '', '', 0, '2015-02-03 18:30:00', NULL, NULL, NULL, NULL),
+(9, 'Anuj', 'demo@gmail.com', 'test@gmail.com', 'Test@12345', '1234567890', 'm', '', 'New Delhi India', 0, '2019-07-10 18:30:00', NULL, NULL, NULL, NULL),
+(11, 'Test user', 'testuser@gmail.com', 'ak@gmail.com', 'Test@123', '1234567890', 'Male', NULL, 'New Delhi', NULL, '2019-08-06 18:09:15', NULL, NULL, NULL, NULL),
+(12, 'ABc', 'abc@gmail.com', 'jsadgj@gmail.com', 'Test@123', '1234567890', 'm', NULL, 'New Delhi India', NULL, '2019-08-10 11:24:31', NULL, NULL, NULL, NULL),
+(13, 'lihklohi', '.k,gbj,k', NULL, '', '', 'm', NULL, NULL, NULL, '2021-02-24 15:58:41', NULL, NULL, NULL, NULL),
+(14, '', '', NULL, '', '', 'm', NULL, NULL, NULL, '2021-02-24 15:58:51', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- بنية الجدول `usercheck`
+-- Table structure for table `usercheck`
 --
 
-DROP TABLE IF EXISTS `usercheck`;
 CREATE TABLE `usercheck` (
   `id` int(11) NOT NULL,
   `logindate` varchar(255) DEFAULT '',
@@ -223,7 +257,7 @@ CREATE TABLE `usercheck` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- إرجاع أو استيراد بيانات الجدول `usercheck`
+-- Dumping data for table `usercheck`
 --
 
 INSERT INTO `usercheck` (`id`, `logindate`, `logintime`, `user_id`, `username`, `email`, `ip`, `mac`, `city`, `country`) VALUES
@@ -248,7 +282,10 @@ INSERT INTO `usercheck` (`id`, `logindate`, `logintime`, `user_id`, `username`, 
 (109, '2019/08/06', '11:39:30pm', 11, 'Test user', 'testuser@gmail.com', 0x3a3a31, 0x31322d46342d38442d31322d39392d39, '', ''),
 (110, '2019/08/10', '04:51:41pm', 11, 'Test user', 'testuser@gmail.com', 0x3a3a31, 0x31322d46342d38442d31322d39392d39, '', ''),
 (111, '2019/08/10', '04:54:44pm', 12, 'ABc', 'abc@gmail.com', 0x3a3a31, 0x31322d46342d38442d31322d39392d39, '', ''),
-(112, '2021/04/08', '11:27:26pm', 9, 'Anuj', 'demo@gmail.com', 0x3132372e302e302e31, 0x31342d46452d42352d43312d46422d35, '', '');
+(112, '2021/04/08', '11:27:26pm', 9, 'Anuj', 'demo@gmail.com', 0x3132372e302e302e31, 0x31342d46452d42352d43312d46422d35, '', ''),
+(113, '2021/06/03', '08:22:29pm', 11, 'Test user', 'testuser@gmail.com', 0x3132372e302e302e31, 0x31342d46452d42352d43312d46422d35, '', ''),
+(114, '2021/06/03', '08:37:17pm', 11, 'Test user', 'testuser@gmail.com', 0x3132372e302e302e31, 0x31342d46452d42352d43312d46422d35, '', ''),
+(115, '2021/06/03', '08:38:17pm', 11, 'Test user', 'testuser@gmail.com', 0x3132372e302e302e31, 0x31342d46452d42352d43312d46422d35, '', '');
 
 --
 -- Indexes for dumped tables
@@ -258,6 +295,18 @@ INSERT INTO `usercheck` (`id`, `logindate`, `logintime`, `user_id`, `username`, 
 -- Indexes for table `admin`
 --
 ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `chat`
+--
+ALTER TABLE `chat`
+  ADD PRIMARY KEY (`chatid`);
+
+--
+-- Indexes for table `chat_login_details`
+--
+ALTER TABLE `chat_login_details`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -307,6 +356,12 @@ ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `chat`
+--
+ALTER TABLE `chat`
+  MODIFY `chatid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
 -- AUTO_INCREMENT for table `prequest`
 --
 ALTER TABLE `prequest`
@@ -334,13 +389,12 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `usercheck`
 --
 ALTER TABLE `usercheck`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 DELIMITER $$
 --
--- أحداث
+-- Events
 --
-DROP EVENT IF EXISTS `change_prequest_stutes`$$
 CREATE DEFINER=`root`@`localhost` EVENT `change_prequest_stutes` ON SCHEDULE EVERY 1 DAY STARTS '2021-04-14 00:51:18' ENDS '2025-04-30 00:51:18' ON COMPLETION PRESERVE ENABLE COMMENT 'sets states of missed prequests to un answered = 3' DO UPDATE prequest SET STATUS = 3 
 WHERE id IN ( 
 SELECT id FROM prequest WHERE 
