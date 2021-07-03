@@ -13,7 +13,7 @@ if(isset($_POST['update']))
 	$a=mysqli_query($con,"update user set name='$name',mobile='$mobile',gender='$gender',alt_email='$aemail',address='$address' where email='".$_SESSION['login']."'");
 if($a)
 {
-echo "<script>alert('Your profile updated successfully.');</script>";
+echo "<script>alert('تم تحديث الملف الشخصي بنجاح.');</script>";
 }
 }
 
@@ -24,7 +24,7 @@ echo "<script>alert('Your profile updated successfully.');</script>";
 <head>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <meta charset="utf-8" />
-<title>CRM | User Profile</title>
+<title>CRM | الملف الشخصي</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta content="" name="description" />
 <meta content="" name="author" />
@@ -58,9 +58,9 @@ echo "<script>alert('Your profile updated successfully.');</script>";
     <div id="portlet-config" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button"></button>
-        <h3>Widget Settings</h3>
+        <h3>خيارات الملف الخصي</h3>
       </div>
-      <div class="modal-body"> Widget settings form goes here </div>
+      <div class="modal-body"></div>
     </div>
     <div class="clearfix"></div>
     <div class="content">  
@@ -78,16 +78,16 @@ echo "<script>alert('Your profile updated successfully.');</script>";
                             <form class="form-horizontal" method="post" enctype="multipart/form-data">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><strong>Your Profile</h3>
+                                    <h3 class="panel-title"><strong>ملفك الشخصي</h3>
                                    <div align="right">
-                                        Registration Date :<?php echo $row['posting_date'];?> 
+                                        تاريخ التسجيل :<?php echo $row['posting_date'];?> 
                                     </div>
                                 </div>
                              
                                 <div class="panel-body">                                                                        
                                     
                                     <div class="form-group">
-                                        <label class="col-md-3 col-xs-12 control-label">Name</label>
+                                        <label class="col-md-3 col-xs-12 control-label">الإسم</label>
                                         <div class="col-md-6 col-xs-12">                                            
                                             <div class="input-group">
                                                 <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
@@ -97,7 +97,7 @@ echo "<script>alert('Your profile updated successfully.');</script>";
                                         </div>
                                     </div>
                                    <div class="form-group">
-                                        <label class="col-md-3 col-xs-12 control-label">Primary Email </label>
+                                        <label class="col-md-3 col-xs-12 control-label">البريد الإلكتروني الرئيسي </label>
                                         <div class="col-md-6 col-xs-12">                                            
                                             <div class="input-group">
                                                 <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
@@ -107,7 +107,7 @@ echo "<script>alert('Your profile updated successfully.');</script>";
                                         </div>
                                     </div>
 									   <div class="form-group">
-                                        <label class="col-md-3 col-xs-12 control-label">alternate Email  </label>
+                                        <label class="col-md-3 col-xs-12 control-label">البريد الإلكتروني البديل  </label>
                                         <div class="col-md-6 col-xs-12">                                            
                                             <div class="input-group">
                                                 <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
@@ -117,7 +117,7 @@ echo "<script>alert('Your profile updated successfully.');</script>";
                                         </div>
                                     </div>
 									   <div class="form-group">
-                                        <label class="col-md-3 col-xs-12 control-label">Contact no </label>
+                                        <label class="col-md-3 col-xs-12 control-label">رقم التواصل </label>
                                         <div class="col-md-6 col-xs-12">                                            
                                             <div class="input-group">
                                                 <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
@@ -130,7 +130,7 @@ echo "<script>alert('Your profile updated successfully.');</script>";
 									
 									
 									   <div class="form-group">
-                                        <label class="col-md-3 col-xs-12 control-label">Gender </label>
+                                        <label class="col-md-3 col-xs-12 control-label">الجنس </label>
                                         <div class="col-md-6 col-xs-12">                                            
                                             <div class="input-group">
                                                 <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
@@ -155,7 +155,7 @@ echo "<script>alert('Your profile updated successfully.');</script>";
 												  ?></option>
             <option value="m">Male</option>
             <option value="f">Female</option>
-            <option value="others">Other</option>
+            
             </select>
                                             </select>
                                             </div>                                            
@@ -167,7 +167,7 @@ echo "<script>alert('Your profile updated successfully.');</script>";
                                 
                                     
                                     <div class="form-group">
-                                        <label class="col-md-3 col-xs-12 control-label">Address</label>
+                                        <label class="col-md-3 col-xs-12 control-label">العنوان</label>
                                         <div class="col-md-6 col-xs-12">                                            
                                             <textarea class="form-control" name="address" rows="5"><?php echo $row['address'];?></textarea>
                                           
@@ -183,7 +183,7 @@ echo "<script>alert('Your profile updated successfully.');</script>";
                                 </div>
 								<?php } ?>
                                 <div class="panel-footer">
-                                    <button class="btn btn-default">Clear Form</button>                                    
+                                    <button class="btn btn-default">مسح البيانات</button>                                    
                                     <input type="submit" value="Submit" name="update" class="btn btn-primary pull-right">
                                 </div>
                             </div>

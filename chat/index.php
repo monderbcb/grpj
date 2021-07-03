@@ -103,7 +103,7 @@ include('header.php');
 					<?php
 					if($currentSession == null)
 					$currentSession = 0;
-										echo "Current session = " .  $currentSession;
+									
 
 					?>
 					<div class="messages" id="conversation" STYLE="padding-bottom:20px!important;">		

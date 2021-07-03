@@ -20,7 +20,7 @@ if(isset($_POST['remark']))
 <head>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <meta charset="utf-8" />
-<title>Admin | Quote Details</title>
+<title>ادارة النظام  | تفاصيل طلبات الإستفسار</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta content="" name="description" />
 <meta content="" name="author" />
@@ -33,6 +33,7 @@ if(isset($_POST['remark']))
 <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
 <link href="assets/css/responsive.css" rel="stylesheet" type="text/css"/>
 <link href="assets/css/custom-icon-set.css" rel="stylesheet" type="text/css"/>
+
 </head>
 <body class="">
 <?php include("header.php");?>
@@ -45,27 +46,27 @@ if(isset($_POST['remark']))
       <!-- END SIDEBAR MENU -->
     </div>
   </div>
-  <div class="page-content"> 
+  <div class="page-content" dir="rtl"> 
     <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
     <div id="portlet-config" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button"></button>
-        <h3>Widget Settings</h3>
+        <h3></h3>
       </div>
-      <div class="modal-body"> Widget settings form goes here </div>
+      <div class="modal-body">  </div>
     </div>
 
     <div class="clearfix"></div>
     <div class="content">                           
      <ul class="breadcrumb">
         <li>   
-			<p>Home<p>  					 							
+			<p>الرئيسية<p>  					 							
         </li>     				 
-        <li><a href="#" class="active">Quote Details </a></li>                    
+        <li><a href="#" class="active">تفاصيل الطلبات </a></li>                    
     </ul>
    	<div class="page-title">		
 		<i class="icon-custom-left"></i>
-		<h3>Quote Details</h3>	
+		<h3>تفاصيل الطلبات</h3>	
 	</div>
  	<?php
     $ret=mysqli_query($con,"select * from prequest where id='".$_GET['id']."'");
@@ -78,7 +79,7 @@ if(isset($_POST['remark']))
 					<div class="col-md-12">
 						    <div class="grid simple vertical green">
 							<div class="grid-title no-border">
-								<h4><?php echo $row['name'];?>'s Quote <span class="semi-bold">Details</span></h4>
+								<h4>-<?php echo $row['name'];?>- تفاصيل  <span class="semi-bold"> الاستفسار </span></h4>
 								<div class="tools">
 									<a href="javascript:;" class="collapse"></a>
 									<a href="#grid-config" data-toggle="modal" class="config"></a>
@@ -89,17 +90,17 @@ if(isset($_POST['remark']))
 							<div class="grid-body no-border">
 								<div class="row-fluid ">
 									    <address class="margin-bottom-20 margin-top-10">
-											<strong>Name</strong>:
+											<strong>الاسم</strong>:
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['name'];?><br>
-                                            <strong>Email</strong>:
+                                            <strong>البريد الإلكتروني</strong>:
 											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['email'];?><br>
-                                            <strong>Contact no.</strong>:
+                                            <strong>رقم الهاتف.</strong>:
 											&nbsp;<?php echo $row['contactno'];?><br>
-											<strong>Company</strong>:
+											<strong>الشركة</strong>:
 											&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row['company'];?><br>
 										</address>	
                                         <address class="margin-bottom-20 margin-top-10">
-											<strong>Required Services</strong><br>
+											<strong>الخدمات المطلوبة</strong><br>
 											<?php 
 											
 											if ($row['others']==1) {
@@ -121,14 +122,14 @@ if(isset($_POST['remark']))
 											
 										</address>										 
 										<address>
-											<strong>Description</strong><br>
+											<strong>التفاصيل</strong><br>
 										<?php echo $row['query'];?>
 										</address>
                                         <form name="remark" action="" method="post" enctype="multipart/form-data">
                                         <address>
-										<strong>Past Remark</strong><br>
+										<strong>تعليق ادارة النظام</strong><br>
 											<?php echo $row['remark'];?><br>
-											<strong>New Remark ?</strong><br>
+											<strong> تعليق جديد</strong><br>
 											
 										<textarea name="adminremark" cols="70" rows="4"></textarea><br /><br />
                                         <input type="submit" name="remark" value="Submit" />

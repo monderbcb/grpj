@@ -15,12 +15,12 @@ if(isset($_POST['submit']))
 	$num=mysqli_fetch_array($query);
 	if($num>1)
 	{
-	$_SESSION['msg']="Email-id already register with us";	
+	$_SESSION['msg']="البريد الإلكتروني موجود مسبقاً , اد نسيت كلمة المرور الرجاء الضغط علي الخيار";	
 	}
 	else
 	{
- mysqli_query($con,"insert into user(name,email,password,mobile,gender) values('$name','$email','$password','$mobile','$gender')");
-	$_SESSION['msg']="Successfully register with us";
+ mysqli_query($con,"insert into user(name,email,password,mobile,gender,status) values('$name','$email','$password','$mobile','$gender','0')");
+	$_SESSION['msg']="تم التسجيل بنجاح";
 	}
 }
 ?>
@@ -29,7 +29,7 @@ if(isset($_POST['submit']))
 <head>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <meta charset="utf-8" />
-<title>CRM | Registration</title>
+<title>CRM | تسجيل المستخدمين يدوياً</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta content="" name="description" />
 <meta content="" name="author" />
@@ -91,7 +91,7 @@ function emailcheck1(str)
      var flag=0; 
 		   if(document.getElementById('name').value=="")
             {
-            document.getElementById('errname').innerHTML="*Name field is empty.";
+            document.getElementById('errname').innerHTML="*حقل اسم فارغ.";
             flag=1;
             document.getElementById('errname').style.display="block";
             }
@@ -102,7 +102,7 @@ function emailcheck1(str)
 			
 			if(emailcheck1(document.getElementById('email').value)== false)
             {
-             document.getElementById('vldt').innerHTML="*Enter Valid Email id.";
+             document.getElementById('vldt').innerHTML="*ادخل البريد الإلكتروني.";
             flag=1;
             document.getElementById('vldt').style.display="block";
             }
@@ -113,7 +113,7 @@ function emailcheck1(str)
 			
 			 if(document.getElementById('password').value=="")
             {
-            document.getElementById('pwd').innerHTML="*Password field empty.";
+            document.getElementById('pwd').innerHTML="*حقل الرقم السري فارغ.";
             flag=1;
             document.getElementById('pwd').style.display="block";
             }
@@ -123,7 +123,7 @@ function emailcheck1(str)
             } 
 			 if(document.getElementById('cpassword').value=="")
             {
-            document.getElementById('cpwd').innerHTML="*Confirm password field empty.";
+            document.getElementById('cpwd').innerHTML="*تأكيد كلمة المرور فارغة.";
             flag=1;
             document.getElementById('cpwd').style.display="block";
             }
@@ -134,7 +134,7 @@ function emailcheck1(str)
 			
 			 if(document.getElementById('cpassword').value!=document.getElementById('password').value)
             {
-            document.getElementById('mpwd').innerHTML="*Password or Cofirm Password doesnot match.";
+            document.getElementById('mpwd').innerHTML="*الرقم السري او تأكيد الرقم السري غير متطابقين";
             flag=1;
             document.getElementById('mpwd').style.display="block";
             }
@@ -145,7 +145,7 @@ function emailcheck1(str)
 			
 			if(document.getElementById('phone').value.length<10)
             {
-            document.getElementById('mb').innerHTML="*Enter 10 digit valid mobile number.";
+            document.getElementById('mb').innerHTML="*ادخل رقم هاتف يحتوي علي 10 خانات .";
             flag=1;
             document.getElementById('mb').style.display="block";
             }
@@ -175,22 +175,16 @@ function emailcheck1(str)
 </script>
 
 </head>
-<body class="error-body no-top">
-<div class="container">
+<body class="error-body no-top" dir="rtl">
+<div class="container" dir="rtl">
   <div class="row login-container column-seperation">  
-        <div class="col-md-5 col-md-offset-1">
-          <h2>Sign in to CRM</h2>
-          <p>            <a href="index.php">Sign in Now!</a> for a webarch account,It's free and always will be..</p>
-          <br>
-
-		  
-        </div>
-        <div class="col-md-5 "> <br>
+ 
+        <div class="col-md-12 "> <br>
         <p style="color:#F00"><?php echo $_SESSION['msg'];?><?php echo $_SESSION['msg']="";?></p>
 		 <form id="validate"  class="login-form" action="" method="post">
 		 <div class="row">
 		 <div class="form-group col-md-10">
-            <label class="form-label">Name</label>
+            <label class="form-label">الإسم</label>
             <div class="controls">
 				<div class="input-with-icon  right">                                       
 					<i class=""></i>
@@ -202,7 +196,7 @@ function emailcheck1(str)
           </div>
            <div class="row">
 		 <div class="form-group col-md-10">
-            <label class="form-label">Email id</label>
+            <label class="form-label">البريد الإلكتروني</label>
             <div class="controls">
 				<div class="input-with-icon  right">                                       
 					<i class=""></i>
@@ -214,7 +208,7 @@ function emailcheck1(str)
           </div>
            <div class="row">
 		 <div class="form-group col-md-10">
-            <label class="form-label">Password</label>
+            <label class="form-label">الرقم السري </label>
             <div class="controls">
 				<div class="input-with-icon  right">                                       
 					<i class=""></i>
@@ -226,7 +220,7 @@ function emailcheck1(str)
           </div>
 		  <div class="row">
           <div class="form-group col-md-10">
-            <label class="form-label">Re-Password</label>
+            <label class="form-label">تأكيد الرقم السري</label>
             <span class="help"></span>
             <div class="controls">
 				<div class="input-with-icon  right">                                       
@@ -240,7 +234,7 @@ function emailcheck1(str)
           </div>
           <div class="row">
           <div class="form-group col-md-10">
-            <label class="form-label">Contact no.</label>
+            <label class="form-label">رقم الهاتف </label>
             <span class="help"></span>
             <div class="controls">
 				<div class="input-with-icon  right">                                       
@@ -254,13 +248,13 @@ function emailcheck1(str)
           </div>
           <div class="row">
           <div class="form-group col-md-10">
-            <label class="form-label">Gender</label>
+            <label class="form-label">الجنس</label>
             <span class="help"></span>
             <div class="controls">
 				<div class="input-with-icon  right">                                       
 					<i class=""></i>
-					<input type="radio" value="m" name="gender" checked > Male
-                                              <input type="radio" value="f" name="gender" > Female
+					<input type="radio" value="m" name="gender" checked > ذكر
+                                              <input type="radio" value="f" name="gender" > أنثى
                                 
 				</div>
             </div>

@@ -36,7 +36,7 @@ $_SESSION['msg']="Query Send";
 <head>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <meta charset="utf-8" />
-<title>CRM | Request Quote</title>
+<title>CRM | طلب استفسار</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta content="" name="description" />
 <meta content="" name="author" />
@@ -70,14 +70,14 @@ $_SESSION['msg']="Query Send";
     <div id="portlet-config" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button"></button>
-        <h3>Widget Settings</h3>
+        <h3>طلبات الإستفسار</h3>
       </div>
-      <div class="modal-body"> Widget settings form goes here </div>
+      <div class="modal-body"> خيارات طلبات الإستفسار </div>
     </div>
     <div class="clearfix"></div>
     <div class="content">  
 		<div class="page-title">	
-			<h3>Request a Quote</h3>
+			<h3>طلب استفسار</h3>
      
 	
              <div class="row">
@@ -89,7 +89,7 @@ $_SESSION['msg']="Query Send";
                                  <p style="color:#F00;"><?php  if(isset($_SESSION['msg']))
                                                                 echo $_SESSION['msg'];?><?php echo $_SESSION['msg']="";?></p>
                                 <div class="panel-body">
-                                    <p>Please click below mention services of your interest to receive quotation for the same:</p>
+                                    <p>الرجاء الظغط علي الخيارات الموجودة للحصول علي تقدير مبدئي لطلبك:</p>
                                 </div>
                                 <div class="panel-body">                                                                        
                                     
@@ -98,7 +98,7 @@ $_SESSION['msg']="Query Send";
                                         <div class="col-md-6">
                                            
                                             <div class="form-group">
-                                                <label class="col-md-3 control-label">Name </label>
+                                                <label class="col-md-3 control-label">الإسم </label>
                                                 <div class="col-md-9">                                            
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
@@ -109,7 +109,7 @@ $_SESSION['msg']="Query Send";
                                             </div>
                                             
                                             <div class="form-group">                                        
-                                                <label class="col-md-3 control-label">Contact no</label>
+                                                <label class="col-md-3 control-label">رقم الهاتف</label>
                                                 <div class="col-md-9 col-xs-12">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
@@ -118,7 +118,7 @@ $_SESSION['msg']="Query Send";
                                                 </div>
                                             </div>
                                             <div class="form-group">                                        
-                                                <label class="col-md-3 control-label">Email</label>
+                                                <label class="col-md-3 control-label">البريد الإلكتروني</label>
                                                 <div class="col-md-9">
                                                     <div class="input-group">
                                                         <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
@@ -129,7 +129,7 @@ $_SESSION['msg']="Query Send";
                                             </div>
                                             
                                                <div class="form-group">                                        
-                                                <label class="col-md-3 control-label">Company</label>
+                                                <label class="col-md-3 control-label">اسم الشركة</label>
                                                     <div class="col-md-9">
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
@@ -139,7 +139,7 @@ $_SESSION['msg']="Query Send";
                                                     </div>
                                                 </div>
                                             <div class="form-group">
-                                             <label class="col-md-3 control-label">Service Required :</label>
+                                             <label class="col-md-3 control-label">الخدمات المطلوبة :</label>
                                                 <div class="col-md-9">       
                                              
                                             <?php  
@@ -150,7 +150,7 @@ $_SESSION['msg']="Query Send";
                                             
                                             <?php } ?> 
                                             <label class="check">
-                                                <input type="checkbox" class="icheckbox" name="other" value="1" /> Other ?</label><br>
+                                                <input type="checkbox" class="icheckbox" name="other" value="1" /> أخرى ?</label><br>
                                            </div>
                                             
                                             
@@ -166,7 +166,7 @@ $_SESSION['msg']="Query Send";
                                         </div>
                                         <div style="margin-top:20px;" class="col-md-6">
                                          <div class="form-group">
-                                                <label class="col-md-3 control-label">Query</label>
+                                                <label class="col-md-3 control-label">شرح</label>
                                                 <div class="col-md-9 col-xs-12">                                            
                                                     <textarea class="form-control" rows="5" name="query" required></textarea>
                                                 </div>
@@ -176,7 +176,7 @@ $_SESSION['msg']="Query Send";
 
                                 </div>
                                 <div class="panel-footer">
-                                    <button class="btn btn-default">Clear Form</button>                                    
+                                    <button class="btn btn-default">مسح البيانات</button>                                    
                                     <input value="Submit" type="submit" name="submit" class="btn btn-primary pull-right">
                                 </div>
                             </div>

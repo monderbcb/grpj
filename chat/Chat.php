@@ -2,7 +2,7 @@
 class Chat{
     private $host  = 'localhost';
     private $user  = 'root';
-    private $password   = "mysql";
+    private $password   = "";
     private $database  = "crm";      
     private $chatTable = 'chat';
 	private $chatUsersTable = 'user';
@@ -76,7 +76,24 @@ class Chat{
 		mysqli_query($this->dbConnect, $sqlUserUpdate);		
 	}
 	public function insertChat($reciever_userid, $user_id, $chat_message) {		
-		$sqlInsert = "
+		if ($_SESSION['id'] == 0) {
+			$sqlInsert = "
+			INSERT INTO ".$this->chatTable." 
+			(reciever_userid, sender_userid, message, status , admin_id) 
+			VALUES ('".$reciever_userid."', '".$user_id."', '".$chat_message."', '1' , ".$_SESSION['admin_id'].")";
+		$result = mysqli_query($this->dbConnect, $sqlInsert);
+		if(!$result){
+			return ('Error in query: '. mysqli_error());
+		} else {
+			$conversation = $this->getUserChat($user_id, $reciever_userid);
+			$data = array(
+				"conversation" => $conversation			
+			);
+
+			echo json_encode($data);	
+		}
+		}else{
+			$sqlInsert = "
 			INSERT INTO ".$this->chatTable." 
 			(reciever_userid, sender_userid, message, status) 
 			VALUES ('".$reciever_userid."', '".$user_id."', '".$chat_message."', '1')";
@@ -90,6 +107,7 @@ class Chat{
 			);
 
 			echo json_encode($data);	
+		}
 		}
 	}
 	public function getUserChat($from_user_id, $to_user_id) {

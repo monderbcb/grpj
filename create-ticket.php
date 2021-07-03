@@ -5,6 +5,7 @@ session_start();
 include("dbconnection.php");
 include("checklogin.php");
 check_login();
+$services = mysqli_query($con,"select * from service where status= 1");
 if(isset($_POST['send']))
 {
 $count_my_page = ("hitcounter.txt");
@@ -19,11 +20,11 @@ $subject=$_POST['subject'];
 $tt=$_POST['tasktype'];
 $priority=$_POST['priority'];
 $ticket=$_POST['description'];
-//$ticfile=$_FILES["tfile'"]["name"];
+$ticfile=$_FILES["tfile"]["name"];
 $st="Open";
 $pdate=date('Y-m-d');
-//move_uploaded_file($_FILES["tfile"]["tmp_name"],"ticketfiles/".$_FILES["tfile"]["name"]);
-$a=mysqli_query($con,"insert into ticket(ticket_id,email_id,subject,task_type,prioprity,ticket,status,posting_date)  values('$tid','$email','$subject','$tt','$priority','$ticket','$st','$pdate')");
+move_uploaded_file($_FILES["tfile"]["tmp_name"],"ticketfiles/".$_FILES["tfile"]["name"]);
+$a=mysqli_query($con,"insert into ticket(ticket_id,email_id,subject,task_type,prioprity,ticket,attachment,status,posting_date)  values('$tid','$email','$subject','$tt','$priority','$ticket', '$ticfile','$st','$pdate' )");
 if($a)
 {
 echo "<script>alert('Ticket Genrated');</script>";
@@ -36,7 +37,7 @@ echo "<script>alert('Ticket Genrated');</script>";
 <head>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <meta charset="utf-8" />
-<title>CRM | Create  ticket</title>
+<title>CRM | اضافة تذكرة دعم فني</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta content="" name="description" />
 <meta content="" name="author" />
@@ -74,26 +75,26 @@ echo "<script>alert('Ticket Genrated');</script>";
     <div id="portlet-config" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button"></button>
-        <h3>Widget Settings</h3>
+        <h3>خيارات المكونات</h3>
       </div>
-      <div class="modal-body"> Widget settings form goes here </div>
+      <div class="modal-body"> مكان خيارات المكون </div>
     </div>
     <div class="clearfix"></div>
     <div class="content">  
 		<div class="page-title">	
-			<h3>Create ticket</h3>
+			<h3>اضافة تذكرة</h3>
      
 	
              <div class="row">
                         <div class="col-md-12">
                             
-                            <form class="form-horizontal" name="form1" method="post" action="" onSubmit="return valid();">
+                            <form class="form-horizontal" name="form1" method="post" enctype="multipart/form-data" action="" onSubmit="return valid();">
                             <div class="panel panel-default">
                              
                                 <div class="panel-body">                                                                        
                                     <p align="center" style="color:#FF0000"><?=$_SESSION['msg1'];?><?=$_SESSION['msg1']="";?></p>
                                <div class="form-group">                                        
-                                        <label class="col-md-3 col-xs-12 control-label">Subject</label>
+                                        <label class="col-md-3 col-xs-12 control-label">العنوان</label>
                                         <div class="col-md-6 col-xs-12">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
@@ -105,38 +106,40 @@ echo "<script>alert('Ticket Genrated');</script>";
 									
 									
 									 <div class="form-group">
-                                        <label class="col-md-3 col-xs-12 control-label">Task Type</label>
-                                        <div class="col-md-6 col-xs-12">                                                                                            
+                                        <label class="col-md-3 col-xs-12 control-label">نوع الخدمة</label>
+                                        <div class="col-md-6 col-xs-12">                          
+                                                                                                      
                                             <select  name="tasktype" class="form-control select" required>
-                                                <option> Select your Task Type</option>
-                                                <option value="billing">Billing</option>
-                                                <option value="ot1">Option 1</option>
-                                                <option value="ot2">Option 2</option>
-                                                <option value="ot3">Option 3</option>
+                                            <option > اختار نوع الخدمة</option>
+                                            <?php while($row=mysqli_fetch_assoc($services)) {?>    
+                                               
+                                                <option value="<?php echo $row['name'];?>"><?php echo $row['name'];?></option>
+                                                <?php } ?>
                                             </select>
                                            </div>
                                     </div>
 									
 										 <div class="form-group">
-                                        <label class="col-md-3 col-xs-12 control-label">Priority</label>
+                                        <label class="col-md-3 col-xs-12 control-label">الأولوية</label>
                                         <div class="col-md-6 col-xs-12">                                                                                            
                                             <select name="priority" class="form-control select">
-                                                <option value="">Choose your Priority</option>
-                                                <option value="important">Important</option>
-                                                <option value="urgent(functional problem)">Urgent (Functional Problem)</option>
-                                                <option value="non-urgent">Non-Urgent</option>
-                                                <option value="question">Question</option>
+                                                <option value="">اختار الأولوية</option>
+                                                <option value="important">مهم</option>
+                                                <option value="urgent(functional problem)">عاجل</option>
+                                                <option value="non-urgent">غير عاجل</option>
+                                                <option value="question">سؤال</option>
                                             </select>
                                            </div>
                                     </div>
 									
 									  
                                     <div class="form-group">
-                                        <label class="col-md-3 col-xs-12 control-label">Description</label>
+                                        <label class="col-md-3 col-xs-12 control-label">الشرح</label>
                                         <div class="col-md-6 col-xs-12">                                            
                                             <textarea name="description" required class="form-control" rows="5"></textarea>
-                                            
+                                            <input name="tfile" type="file"> 
                                         </div>
+                                       
                                     </div>
 									
 								

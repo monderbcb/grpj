@@ -50,14 +50,14 @@ check_login();
     </div>
   </div>
   <!-- BEGIN PAGE CONTAINER-->
-  <div class="page-content">
+  <div class="page-content" dir="rtl" >
     <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
     <div id="portlet-config" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button"></button>
-        <h3>Widget Settings</h3>
+        <h3></h3>
       </div>
-      <div class="modal-body"> Widget settings form goes here </div>
+      <div class="modal-body">  </div>
     </div>
     <div class="clearfix"></div>
     <div class="content sm-gutter">
@@ -69,13 +69,13 @@ check_login();
 			<div class="tiles green m-b-10">
               <div class="tiles-body">
 			  <div class="controller"> <a href="javascript:;" class="reload"></a> <a href="javascript:;" class="remove"></a> </div>
-                <div class="tiles-title text-black">Overall Visitors </div>
+                <div class="tiles-title text-black">عدد الزوار الكلي </div>
 			         <div class="widget-stats">
                       <div class="wrapper transparent"> 
                       <?php $ov=mysqli_query($con,"select * from usercheck");
 					  $num=mysqli_num_rows($ov);
 					  ?>
-						<span class="item-title">Overall Visitors</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $num;?>" data-animation-duration="700">0</span>
+						<span class="item-title">عدد الزوار الكلي</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $num;?>" data-animation-duration="700">0</span>
 					  </div>
                     </div>
                   
@@ -91,7 +91,7 @@ check_login();
 									
 									
 						
-						<span class="item-title">Today</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $num11;?>" data-animation-duration="700">0</span> <?php									
+						<span class="item-title">اليوم</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $num11;?>" data-animation-duration="700">0</span> <?php									
 									
 									?>
 					 </div>
@@ -107,12 +107,12 @@ check_login();
 			<div class="tiles blue m-b-10">
               <div class="tiles-body">
 			  <div class="controller"> <a href="javascript:;" class="reload"></a> <a href="javascript:;" class="remove"></a> </div>
-                <div class="tiles-title text-black">Registered Users  </div>
+                <div class="tiles-title text-black">المستخدمين المسجلين  </div>
 			         <div class="widget-stats">
                       <div class="wrapper transparent">
                       <?php $rt=mysqli_query($con,"select * from user");
 					  $rw=mysqli_num_rows($rt);?> 
-						<span class="item-title">Registered Users</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $rw;?>" data-     animation-duration="700">0</span>
+						<span class="item-title">عدد المستخدمين المسجلين</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $rw;?>" data-     animation-duration="700">0</span>
 					  </div>
                     </div>
                     <div class="widget-stats ">
@@ -121,7 +121,7 @@ check_login();
 					  $utd=date('Y-m-d');
 					  $rt1=mysqli_query($con,"select * from user where posting_date='$utd'");
 					  $rw1=mysqli_num_rows($rt1);?>
-						<span class="item-title">Today's</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $rw1;?>" data-animation-duration="700">0</span> 
+						<span class="item-title">اليوم</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $rw1;?>" data-animation-duration="700">0</span> 
 					 </div>
                     </div>
 			  </div>			
@@ -131,14 +131,14 @@ check_login();
 			<div class="tiles purple m-b-10">
               <div class="tiles-body">
 			  <div class="controller"> <a href="javascript:;" class="reload"></a> <a href="javascript:;" class="remove"></a> </div>
-                <div class="tiles-title text-black">Quote Requests </div>
+                <div class="tiles-title text-black">طلبات الإستفسار </div>
 			         <div class="widget-stats">
                       <div class="wrapper transparent"> 
                       <?php
                       $qr=mysqli_query($con,"select * from prequest");
 					  $oq=mysqli_num_rows($qr);
 					  ?>
-						<span class="item-title">Overall Quotes</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $oq?>" data-animation-duration="700">0</span>
+						<span class="item-title">العدد الكلي</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $oq?>" data-animation-duration="700">0</span>
 					  </div>
                     </div>
                     <div class="widget-stats">
@@ -147,7 +147,7 @@ check_login();
                       $qr1=mysqli_query($con,"select * from prequest where status='1'");
 					  $oq1=mysqli_num_rows($qr1);
 					  ?>
-						<span class="item-title">New Quotes's</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $oq1;?>" data-animation-duration="700">0</span> 
+						<span class="item-title">الطلبات الجديدة</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $oq1;?>" data-animation-duration="700">0</span> 
 					  </div>
                     </div>
                     <div class="widget-stats ">
@@ -156,7 +156,7 @@ check_login();
                       $qr2=mysqli_query($con,"select * from prequest where status='2'");
 					  $oq2=mysqli_num_rows($qr2);
 					  ?>
-						<span class="item-title">Replied</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $oq2;?>" data-animation-duration="700">0</span> 
+						<span class="item-title">تم الرد</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $oq2;?>" data-animation-duration="700">0</span> 
 					 </div>
                     </div>
 					<div class="widget-stats ">
@@ -165,7 +165,7 @@ check_login();
                       $qr3=mysqli_query($con,"select * from prequest where status='3'");
 					  $oq3=mysqli_num_rows($qr3);
 					  ?>
-						<span class="item-title">Un-Answerd</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $oq3;?>" data-animation-duration="700">0</span> 
+						<span class="item-title">لم يتم الرد</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $oq3;?>" data-animation-duration="700">0</span> 
 					 </div>
                     </div>
                   
@@ -182,13 +182,13 @@ check_login();
 			<div class="tiles red m-b-10">
               <div class="tiles-body">
 			  <div class="controller"> <a href="javascript:;" class="reload"></a> <a href="javascript:;" class="remove"></a> </div>
-                <div class="tiles-title text-black">Overall Tickets </div>
+                <div class="tiles-title text-black">كل تذاكر الدعم </div>
 			         <div class="widget-stats">
                       <div class="wrapper transparent"> 
                       <?php $vt=mysqli_query($con,"select * from ticket");
 					  $ovt=mysqli_num_rows($vt);
 					  ?>
-						<span class="item-title">All Tickets</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $ovt;?>" data-animation-duration="700">0</span>
+						<span class="item-title">العدد الكلي</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $ovt;?>" data-animation-duration="700">0</span>
 					  </div>
                     </div>
                   
@@ -204,7 +204,7 @@ check_login();
 									
 									
 						
-						<span class="item-title">Pending Tickets</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $otv1;?>" data-animation-duration="700">0</span> <?php									
+						<span class="item-title">لم يتم الرد</span> <span class="item-count animate-number semi-bold" data-value="<?php echo $otv1;?>" data-animation-duration="700">0</span> <?php									
 									
 									?>
 					 </div>

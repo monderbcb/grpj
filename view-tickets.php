@@ -11,7 +11,7 @@ check_login();
 <head>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <meta charset="utf-8" />
-<title>User | Ticket Support</title>
+<title>User | عرض التذاكر</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta content="" name="description" />
 <meta content="" name="author" />
@@ -41,26 +41,26 @@ check_login();
     <div id="portlet-config" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button"></button>
-        <h3>Widget Settings</h3>
+        <h3>خيارات اضافة تذكرة</h3>
       </div>
-      <div class="modal-body"> Widget settings form goes here </div>
+      <div class="modal-body">  </div>
     </div>
     <div class="clearfix"></div>
     <div class="content">
       <ul class="breadcrumb">
         <li>
-          <p>Home</p> 
+          <p>الرئيسية</p> 
         </li>
-        <li><a href="#" class="active">View Ticket</a></li>
+        <li><a href="#" class="active">عرض التذاكر</a></li>
       </ul>
       <div class="page-title"> <i class="icon-custom-left"></i>
-        <h3>Ticket Support</h3>
+        <h3>تذاكر الدعم الفني</h3>
       </div>
       <div class="clearfix"></div>
       
-      <h4> <span class="semi-bold">Tickets</span></h4>
+      <h4> <span class="semi-bold">التذاكر</span></h4>
       <br>
-     <?php $rt=mysqli_query($con,"select * from ticket where email_id='".$_SESSION['login']."'");
+     <?php $rt=mysqli_query($con,"select * from ticket where email_id='".$_SESSION['login']."' ORDER BY `ticket`.`posting_date` DESC");
      $num=mysqli_num_rows($rt);
 if($num>0){
 
@@ -71,8 +71,8 @@ if($num>0){
         <div class="col-md-12">
           <div class="grid simple no-border">
             <div class="grid-title no-border descriptive clickable">
-              <h4 class="semi-bold"><?php echo $row['subject'];?></h4>
-              <p ><span class="text-success bold">Ticket #<?php echo $row['ticket_id'];?></span> - Created on <?php echo $row['posting_date'];?>
+              <h4 class="semi-bold"><?php echo $row['subject'] . "------ " . $row['task_type'];?></h4>
+              <p ><span class="text-success bold">Ticket #<?php echo $row['ticket_id'];?></span> - تاريخ الإنشاء <?php echo $row['posting_date'];?>
              <span class="label label-important"><?php echo $row['status'];?></span></p>
               <div class="actions"> <a class="view" href="javascript:;"><i class="fa fa-search"></i></a>  </div>
             </div>
@@ -99,7 +99,13 @@ if($num>0){
                       <br>
                       <?php echo $row['admin_remark'];?>
                       <hr>
-                      <p class="small-text">Posted on <?php echo $row['admin_remark_date'];?></p>
+                      <p class="small-text">تاريخ الرد <?php echo $row['admin_remark_date'];?></p>
+                      <p class="small-text"> <?php  
+                      if ($row['attachment'] != "" ) {
+                       echo "<a href='ticketfiles/".$row['attachment']."' target ='_blank'> يوجد صورة مرفقة </a>" ;
+                      }
+                      
+                      ?></p>
                     </div>
                     <div class="clearfix"></div>
                   </div>
@@ -108,7 +114,7 @@ if($num>0){
               </div>
             </div>
                <?php } } else {?>
-<h3 align="center" style="color:red;">No Record found</h3>
+<h3 align="center" style="color:red;">لاتوجد تذاكر</h3>
 <?php } ?>                
           </div>
         </div>

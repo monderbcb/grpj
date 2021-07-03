@@ -9,11 +9,11 @@ if (isset($_POST['del'])){
     $msg=mysqli_query($con,"select COUNT(id) FROM usercheck WHERE user_id = $idDeleted "); 
     $te=mysqli_fetch_row($msg)[0];
     if ($te == 0 ) {
-        $msg2=mysqli_query($con,"DELETE FROM user WHERE id= $idDeleted "); 
+        $msg2=mysqli_query($con,"UPDATE user SET `status` ='-1' WHERE id = $idDeleted "); 
         echo '
         <script>
         alert (
-            "USER DELETED SUCCFULLY"
+            "تم حذف المستخدم بنجاح"
         )
         </script>
         ';
@@ -22,7 +22,7 @@ if (isset($_POST['del'])){
         echo '
         <script>
         alert (
-            "This cannot be deleted< becuse 7leep bil aLOUZE"
+            "لايمكن حذف المستخدم لأن لديه طلبات دعم فني و مراسلات"
         )
         </script>
         ';
@@ -35,7 +35,7 @@ if (isset($_POST['del'])){
 <head>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <meta charset="utf-8" />
-<title>Admin | Manage Users</title>
+<title>الإدارة | ادارة المستخدمين</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta content="" name="description" />
 <meta content="" name="author" />
@@ -48,6 +48,11 @@ if (isset($_POST['del'])){
 <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
 <link href="assets/css/responsive.css" rel="stylesheet" type="text/css"/>
 <link href="assets/css/custom-icon-set.css" rel="stylesheet" type="text/css"/>
+<style>
+table th , table td{
+    text-align:center;
+}
+</style>
 </head>
 <body class="">
 <?php include("header.php");?>
@@ -59,30 +64,30 @@ if (isset($_POST['del'])){
       <!-- END SIDEBAR MENU -->
     </div>
   </div>
-    <div class="page-content">
+    <div class="page-content" dir="rtl">
         <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
             <div id="portlet-config" class="modal hide">
                 <div class="modal-header">
                     <button data-dismiss="modal" class="close" type="button"></button>
-                     <h3>Widget Settings</h3>
+                     <h3></h3>
 
                 </div>
-                <div class="modal-body">Widget settings form goes here</div>
+                <div class="modal-body"></div>
             </div>
             <div class="clearfix"></div>
             <div class="content">
                 <ul class="breadcrumb">
                     <li>
-                        <p>YOU ARE HERE</p>
+                        <p>الرئيسية</p>
                     </li> 
-                    <li><a href="#" class="active">Manage Users</a>
+                    <li><a href="#" class="active">ادارة المستخدمين</a>
 
                     </li>
                 </ul>
                 <div class="page-title">	<a href="./home.php">  <i class="icon-custom-left"></i></a>
 
-                    	<h3 >Manage Users </h3>
-                        <a href="./registration.php" class="fa fa-2x fa-user" aria-hidden="true"> add new users</a>	
+                    	<h3 >ادارة المستخدمين </h3>
+                        <a href="./registration.php" class="fa fa-2x fa-user" aria-hidden="true"> اضافة مستخدم</a>	
                 </div>
              
                 <div class="row">
@@ -91,7 +96,7 @@ if (isset($_POST['del'])){
                             <div class="col-md-12">
                                 <div class="grid simple ">
                                     <div class="grid-title no-border">
-                                        	<h4>All Users Details</h4>
+                                        	<h4>تفاصي المستخدمين</h4>
                                         <div class="tools">	<a href="javascript:;" class="collapse"></a>
 											<a href="#grid-config" data-toggle="modal" class="config"></a>
 											<a href="javascript:;" class="reload"></a>
@@ -100,19 +105,20 @@ if (isset($_POST['del'])){
                                     </div>
                                     <div class="grid-body no-border">
                               
-                                            <table class="table table-hover no-more-tables">
+                                            <table class="table table-hover no-more-tables" > 
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>Full Name</th>
-                                                        <th>Email ID </th>
-                                                        <th>Contact No</th>
-                                                        <th>Registration Date</th>
-                                                        <th>Action</th>
+                                                        <th>الإسم بالكامل</th>
+                                                        <th>البريد الإلكتروني </th>
+                                                        <th>رقم الهاتف</th>
+                                                        <th>تاريخ التسجيل</th>
+                                                        <th>الحالة</th>
+                                                        <th>الخيارات</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                <?php $ret=mysqli_query($con,"select * from user ORDER BY id asc");
+                                                <?php $ret=mysqli_query($con,"SELECT * FROM user  ORDER BY id asc");
 												$cnt=1;
 												while($row=mysqli_fetch_array($ret))
 												{
@@ -124,12 +130,13 @@ if (isset($_POST['del'])){
                                                         <td><?php echo $row['email'];?></td>
                                                          <td><?php echo $row['mobile'];?></td>
                                                           <td><?php echo $row['posting_date'];?></td>
+                                                          <td><?php echo $row['status'] == "-1" ? "محذوف":"فعال" ;?></td>
                                                           <td>
                                                           <form name="abc" action="" method="post">
-                                                           <a href="edit-user.php?id=<?php echo $row['id'];?>" class="btn btn-primary btn-xs btn-mini">View n Edit</a>
+                                                           <a href="edit-user.php?id=<?php echo $row['id'];?>" class="btn btn-primary btn-xs btn-mini">عرض التعديل</a>
                                                            <input type="hidden" name="delnum" value="<?php echo $row['id'];?>" > 
                                                            <input type="submit" name="del" value="Delete" class="btn btn-danger btn-xs btn-mini" 
-                                                           onclick="return confirm('Are you sure you want to DELETE THIS USER ?')">
+                                                           onclick="return confirm('هل أنت متأكد من حذف المستخدم ؟')">
                                                            </form>
                                                           </td>
                                                     </tr>

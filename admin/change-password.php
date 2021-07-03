@@ -14,12 +14,12 @@ $num=mysqli_fetch_array($sql);
 if($num>0)
 {
  $con=mysqli_query($con,"update  admin set password='$newpassword' where id='$adminid'");
-$_SESSION['msg1']="Password Changed Successfully !!";
+$_SESSION['msg1']="تم تغير كلمة المرور بنجاح !!";
 //header('location:user.php');
 }
 else
 {
-$_SESSION['msg1']="Old Password not match !!";
+$_SESSION['msg1']="كلمة السر القديمة غير مطابقة !!";
 }
 }
 ?>
@@ -29,7 +29,7 @@ $_SESSION['msg1']="Old Password not match !!";
 <head>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <meta charset="utf-8" />
-<title>CRM | Change Password</title>
+<title>CRM | تغير كلمة المرور</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta content="" name="description" />
 <meta content="" name="author" />
@@ -48,37 +48,37 @@ function valid()
 {
 if(document.form1.oldpass.value=="")
 {
-alert(" Old Password Field Empty !!");
+alert(" حقل كلمة المرور فارغ !!");
 document.form1.oldpass.focus();
 return false;
 }
 else if(document.form1.newpass.value=="")
 {
-alert(" New Password Field Empty !!");
+alert(" حقل كلمة المرور الجديدة فارغ !!");
 document.form1.newpass.focus();
 return false;
 }
 else if(document.form1.confirmpassword.value=="")
 {
-alert(" Re-Type Password Field Empty !!");
+alert(" حقل اعادة كتابة كلمة المرور فارغ !!");
 document.form1.confirmpassword.focus();
 return false;
 }
 else if(document.form1.newpass.value.length<6)
 {
-alert(" Password Field length must be atleast of 6 characters !!");
+alert(" حقل كلمة المرور يجب ان لا يقل طولها عن 6 خانات علي الأقل !!");
 document.form1.newpass.focus();
 return false;
 }
 else if(document.form1.confirmpassword.value.length<6)
 {
-alert(" Re-Type Password Field less than 6 characters !!");
+alert(" حقل اعادة كتابة كلمة المرور يجب ان لا يقل طولها عن 6 خانات علي الأقل  !!");
 document.form1.confirmpassword.focus();
 return false;
 }
 else if(document.form1.newpass.value!= document.form1.confirmpassword.value)
 {
-alert("Password and Re-Type Password Field do not match  !!");
+alert("حقل اعادة كتابة كلمة المرور و كلمة المرور الجديدة لايتطابقان  !!");
 document.form1.newpass.focus();
 return false;
 }
@@ -105,14 +105,14 @@ return true;
     <div id="portlet-config" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button"></button>
-        <h3>Widget Settings</h3>
+        <h3></h3>
       </div>
-      <div class="modal-body"> Widget settings form goes here </div>
+      <div class="modal-body">  </div>
     </div>
     <div class="clearfix"></div>
     <div class="content">  
 		<div class="page-title">	
-			<h3>Change Password</h3>	
+			<h3>تغير كلمة المرور</h3>	
             <div class="row">
                         <div class="col-md-12">
                             
@@ -123,7 +123,7 @@ return true;
                                 <div class="panel-body">                                                                        
                                     <p align="center" style="color:#FF0000"><?php echo $_SESSION['msg1'];?><?php echo $_SESSION['msg1']="";?></p>
                                <div class="form-group">                                        
-                                        <label class="col-md-3 col-xs-12 control-label">Current Password</label>
+                                        <label class="col-md-3 col-xs-12 control-label">كلمة المرور الحالية</label>
                                         <div class="col-md-6 col-xs-12">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
@@ -135,7 +135,7 @@ return true;
 									
 									
 									  <div class="form-group">                                        
-                                        <label class="col-md-3 col-xs-12 control-label">New Password</label>
+                                        <label class="col-md-3 col-xs-12 control-label">كلمة المرور الجديدة</label>
                                         <div class="col-md-6 col-xs-12">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
@@ -144,7 +144,7 @@ return true;
                                           </div>
                                     </div>
 									 <div class="form-group">                                        
-                                        <label class="col-md-3 col-xs-12 control-label">Confirm Password</label>
+                                        <label class="col-md-3 col-xs-12 control-label">تأكيد كلمة المرور (اعادة كتابة كلمة المرور)</label>
                                         <div class="col-md-6 col-xs-12">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><span class="fa fa-unlock-alt"></span></span>
@@ -154,7 +154,7 @@ return true;
                                     </div>
                                 </div>
                                 <div class="panel-footer">
-                                    <button class="btn btn-default">Clear Form</button>                                    
+                                    <button class="btn btn-default">مسح البيانات</button>                                    
                                     <input type="submit" value="Change" name="change" class="btn btn-primary pull-right">
                                 </div>
                             </div>
