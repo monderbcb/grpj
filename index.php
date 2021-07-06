@@ -23,7 +23,7 @@ $sqlUserUpdate = "
 			WHERE id = '".$num['id']."'";			
 		mysqli_query($con, $sqlUserUpdate);	
 $val3 =date("Y/m/d");
-date_default_timezone_set("Asia/Calcutta");
+date_default_timezone_set("Libya/Tripoli");
 $time=date("h:i:sa");
 $tim = $time;
 $ip_address=$_SERVER['REMOTE_ADDR'];

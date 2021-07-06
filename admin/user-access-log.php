@@ -77,7 +77,7 @@ check_login();
                   </tr>
                 </thead>
                 <tbody>
-                <?php $ret=mysqli_query($con,"select * from usercheck ");
+                <?php $ret=mysqli_query($con,"select * from usercheck order by logindate desc ");
 				$cnt=1;
 				while($row=mysqli_fetch_array($ret))
 				{?>
