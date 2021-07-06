@@ -155,7 +155,7 @@ return true;
                                 </div>
                                 <div class="panel-footer">
                                     <button class="btn btn-default">مسح البيانات</button>                                    
-                                    <input type="submit" value="Change" name="change" class="btn btn-primary pull-right">
+                                    <input type="submit" value="تغير" name="change" class="btn btn-primary pull-right">
                                 </div>
                             </div>
                             </form>

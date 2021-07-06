@@ -157,7 +157,7 @@ echo "<script>alert('Ticket Genrated');</script>";
 								
                                 <div class="panel-footer">
                                     <button class="btn btn-default">Clear Form</button>                                    
-                                    <input type="submit" value="Send" name="send" class="btn btn-primary pull-right">
+                                    <input type="submit" value="ارسال" name="send" class="btn btn-primary pull-right">
                                 </div>
                             </div>
                             </form>

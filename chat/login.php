@@ -19,13 +19,13 @@ if (!empty($_POST['email']) && !empty($_POST['pwd'])) {
 }
 
 ?>
-<title>phpzag.com : Demo Push Notification System with PHP & MySQL</title>
+<title>تسجيل الدخول</title>
 <?php include('./container.php');?>
 <div class="container">		
-	<h2>Example: Build Live Chat System with Ajax, PHP & MySQL</h1>		
+	<h2>المحادثات الحية</h1>		
 	<div class="row">
 		<div class="col-sm-4">
-			<h4>Chat Login:</h4>		
+			<h4>تسجيل الدخول لنظام المحادثة:</h4>		
 			<form method="post">
 				<div class="form-group">
 				<?php if ($loginError ) { ?>
@@ -40,13 +40,9 @@ if (!empty($_POST['email']) && !empty($_POST['pwd'])) {
 					<label for="pwd">Password:</label>
 					<input type="password" class="form-control" name="pwd" required>
 				</div>  
-				<button type="submit" name="login" class="btn btn-info">Login</button>
+				<button type="submit" name="login" class="btn btn-info">تسجيل الدخول</button>
 			</form>
 			<br>
-			<p><b>User</b> : adam<br><b>Password</b> : 123</p>
-			<p><b>User</b> : rose<br><b>Password</b> : 123</p>
-			<p><b>User</b> : smith<br><b>Password</b>: 123</p>
-			<p><b>User</b> : merry<br><b>Password</b>: 123</p>
 		</div>
 		
 	</div>

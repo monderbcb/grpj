@@ -58,14 +58,14 @@ echo "<script>alert('تم تحديث الملف الشخصي بنجاح.');</scr
     <div id="portlet-config" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button"></button>
-        <h3>خيارات الملف الخصي</h3>
+        <h3>خيارات الملف الشخصي</h3>
       </div>
       <div class="modal-body"></div>
     </div>
     <div class="clearfix"></div>
     <div class="content">  
 		<div class="page-title">	
-			<h3><?php echo $_SESSION['name'];?>'s Profile</h3>
+			<h3><?php echo $_SESSION['name'];?>  الملف الشخصي </h3>
                            <?php
      $query=mysqli_query($con,"select * from user where email='".$_SESSION['login']."'");
 	 while($row=mysqli_fetch_array($query))
@@ -153,8 +153,8 @@ echo "<script>alert('تم تحديث الملف الشخصي بنجاح.');</scr
 												 
 												  
 												  ?></option>
-            <option value="m">Male</option>
-            <option value="f">Female</option>
+            <option value="m">ذكر</option>
+            <option value="f">انثي</option>
             
             </select>
                                             </select>
@@ -184,7 +184,7 @@ echo "<script>alert('تم تحديث الملف الشخصي بنجاح.');</scr
 								<?php } ?>
                                 <div class="panel-footer">
                                     <button class="btn btn-default">مسح البيانات</button>                                    
-                                    <input type="submit" value="Submit" name="update" class="btn btn-primary pull-right">
+                                    <input type="submit" value="حفظ" name="update" class="btn btn-primary pull-right">
                                 </div>
                             </div>
                             </form>

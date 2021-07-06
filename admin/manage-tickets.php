@@ -109,7 +109,7 @@ echo '<script>alert("Ticket has been updated.")</script>';
                      <textarea name="aremark" cols="50" rows="4" required="true"><?php echo $row['admin_remark'];?></textarea>
                       <hr>
                       <p class="small-text"> 
-                        <input name="update" type="submit"  class="txtbox1" id="Update" value="update" size="40" />
+                        <input name="update" type="submit"  class="txtbox1" id="Update" value="تحديث" size="40" />
  <input name="frm_id" type="hidden" id="frm_id" value="<?php echo $row['id'];?>" /></p>
                       </form>
                     </div>

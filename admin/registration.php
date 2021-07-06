@@ -262,7 +262,7 @@ function emailcheck1(str)
           </div>
          <div class="row">
             <div class="col-md-10">
-              <input onClick="return validation12();"  class="btn btn-primary btn-cons pull-right" name="submit" value="Submit" type="submit" />
+              <input onClick="return validation12();"  class="btn btn-primary btn-cons pull-right" name="submit" value="ارسال" type="submit" />
             </div>
           </div>
 		  </form>

@@ -98,7 +98,7 @@ return true;
 	<div class="pull-right">
 	</div>
   </div>
-  <div class="page-content"> 
+  <div class="page-content" dir="rtl"> 
     <div id="portlet-config" class="modal hide">
       <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button"></button>
@@ -151,8 +151,9 @@ return true;
                                     </div>
                                 </div>
                                 <div class="panel-footer">
-                                    <button class="btn btn-default">تفريغ البيانات</button>                                    
-                                    <input type="submit" value="Change" name="change" class="btn btn-primary pull-right">
+                                    <button class="btn btn-default" style="position:absolute;left:5px;">تفريغ البيانات</button>   
+                                                       
+                                    <input type="submit" value="تغيــــر" name="change" class="btn btn-primary pull-right">
                                 </div>
                             </div>
                             </form>

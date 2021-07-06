@@ -177,7 +177,7 @@ $_SESSION['msg']="Query Send";
                                 </div>
                                 <div class="panel-footer">
                                     <button class="btn btn-default">مسح البيانات</button>                                    
-                                    <input value="Submit" type="submit" name="submit" class="btn btn-primary pull-right">
+                                    <input value="ارسال" type="submit" name="submit" class="btn btn-primary pull-right">
                                 </div>
                             </div>
                             </form>

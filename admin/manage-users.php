@@ -135,8 +135,9 @@ table th , table td{
                                                           <form name="abc" action="" method="post">
                                                            <a href="edit-user.php?id=<?php echo $row['id'];?>" class="btn btn-primary btn-xs btn-mini">عرض التعديل</a>
                                                            <input type="hidden" name="delnum" value="<?php echo $row['id'];?>" > 
-                                                           <input type="submit" name="del" value="Delete" class="btn btn-danger btn-xs btn-mini" 
-                                                           onclick="return confirm('هل أنت متأكد من حذف المستخدم ؟')">
+                                                           <?php echo $row['status'] == "-1" ? "": '<input type="submit" name="del" value="مسح" class="btn btn-danger btn-xs btn-mini" 
+                                                           onclick="return confirm(\'هل أنت متأكد من حذف المستخدم ؟\')">';?>
+                                                           
                                                            </form>
                                                           </td>
                                                     </tr>

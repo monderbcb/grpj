@@ -132,7 +132,7 @@ if(isset($_POST['remark']))
 											<strong> تعليق جديد</strong><br>
 											
 										<textarea name="adminremark" cols="70" rows="4"></textarea><br /><br />
-                                        <input type="submit" name="remark" value="Submit" />
+                                        <input type="submit" name="remark" value="ارسال" />
 										</address>
                                         </form>
 								</div>

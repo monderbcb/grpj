@@ -9,15 +9,15 @@ $row2=mysqli_fetch_array($row1);
 if($row2>0)
 {
 $email = $row2['email'];
-$subject = " CRM about your password";
+$subject = " رسالة من نظام ادارة خدمة العملاء لشركة الوساطة -- بشأن نسيان كلمة المرور";
 $password=$row2['password'];
-$message = "Your password is ".$password;
+$message = "كلمة المرور الخاصة بك :  <b> ".$password."</b>";
 mail($email, $subject, $message, "From: $email");
-$_SESSION['msg']= "Your Password has been sent to your email id Successfully.";
+$_SESSION['msg']= "تم ارسال بريد إلكتروني يحوي علي بيانات تسجيل الدخول .";
 }
 else
 {
-$_SESSION['msg']= "*Email not register with us.";	
+$_SESSION['msg']= "*خطاء - البريد الإلكتروني ليس مسجل لدينا ! الرجاء التأكد من البريد ";	
 }
 }
 ?>
